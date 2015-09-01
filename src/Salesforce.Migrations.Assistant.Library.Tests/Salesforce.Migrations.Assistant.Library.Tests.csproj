@@ -72,7 +72,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Salesforce.Migrations.Assistant.Library\Salesforce.Migrations.Assistant.Library.csproj">
+    <ProjectReference Include="..\Salesforce.Migrations.Assistant.Library\Salesforce.Migrations.Assistant.Library.csproj">
       <Project>{2e2024ab-daa3-45e7-8fa6-2076b889bf98}</Project>
       <Name>Salesforce.Migrations.Assistant.Library</Name>
     </ProjectReference>
