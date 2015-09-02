@@ -27,14 +27,14 @@ namespace Salesforce.Migrations.Assistant.Library
             }
 
             xo.EndWithin()
-            .Node("version").InnerText("28.0");
+            .Node("version").InnerText("34.0");
 
             return xo.GetXmlDocument();
         }
 
         private static IEnumerable<SalesForceChange> ProcesChanges(IEnumerable<Change> changes)
         {
-            return changes.Select(ChangeFactory.BuildSalesForceType).ToList();
+            return changes.Select(ChangeFactory.BuildSalesForceType).Where(sfchange => sfchange != null).ToList();
         }
     }
 
@@ -61,14 +61,17 @@ namespace Salesforce.Migrations.Assistant.Library
             string filename = Path.GetFileName(change.Path);
 
             SalesForceType @type = SalesForceType.Unknown;
-            MapSalesForceTypes.TryGetValue("ext", out @type);
-
-            return new SalesForceChange
+            if (ext != null && MapSalesForceTypes.TryGetValue(ext, out @type))
             {
-                FileName = filename,
-                ChangeType = change.Status,
-                SalesForceType = @type
-            };
+                return new SalesForceChange
+                {
+                    FileName = filename,
+                    ChangeType = change.Status,
+                    SalesForceType = @type
+                };
+            }
+
+            return null;
         }
     }
 
