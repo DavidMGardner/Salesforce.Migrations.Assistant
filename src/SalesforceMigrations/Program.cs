@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using CLAP;
 using CLAP.Validation;
 using Salesforce.Migrations.Assistant.Library;
 
 namespace SalesforceMigrations
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Parser.Run<CommadParser>(args);
         }
@@ -20,9 +21,9 @@ namespace SalesforceMigrations
     internal class CommadParser
     {
         [Verb(IsDefault = true)]
-        void BuildPackage(
-                        [FileExists][Required] string workingdirectory,
-                        [FileExists][Required] string buildOutputDirectory,
+        public static void BuildPackage(
+                        [DirectoryExists][Required] string workingdirectory,
+                        [DirectoryExists][Required] string buildOutputDirectory,
                         [Required] string gitUrl,
                         [Required][DefaultValue("origin/develop")] string gitBranch,
                         [Required] string gitCommit)
@@ -33,7 +34,11 @@ namespace SalesforceMigrations
                                                                                               gitBranch,
                                                                                               gitCommit);
 
-            smab.BuildPackageFile();
+            XmlDocument document = smab.BuildPackageFile();
+
+            // ReSharper disable once UseStringInterpolation
+            document.Save(string.Format("{0}\\package.xml", buildOutputDirectory));
+
         }
     }
 }

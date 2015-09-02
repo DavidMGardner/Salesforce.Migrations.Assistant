@@ -1,4 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 
 
@@ -7,64 +10,91 @@ namespace Salesforce.Migrations.Assistant.Library
     public static class GeneratePackageFile
     {
 
-        public static void WithXMLOutput()
+        public static XmlDocument GenerateOutputXml(IEnumerable<Change> changes)
         {
+            IEnumerable<SalesForceChange> processedChanges = ProcesChanges(changes);
+
             XmlOutput xo = new XmlOutput()
                 .XmlDeclaration()
                 .Node("package").Attribute("xmlns", "http://soap.sforce.com/2006/04/metadata").Within();
-                for (int i = 0; i < 10; i++ )
-                {
-                    xo.Node("types").Within()
-                        .Node("members").InnerText("SamplePage")
-                        .Node("name").InnerText("ApexPage")
-                        .EndWithin();
-                };
-                
-                xo.EndWithin()
-                .Node("version").InnerText("28.0");
 
-            xo.GetXmlDocument().Save("D:\\document.xml");
+            foreach (var salesForceChange in processedChanges)
+            {
+                xo.Node("types").Within()
+                       .Node("members").InnerText(salesForceChange.FileName)
+                       .Node("name").InnerText(salesForceChange.SalesForceType.ToString())
+                       .EndWithin();
+            }
+
+            xo.EndWithin()
+            .Node("version").InnerText("28.0");
+
+            return xo.GetXmlDocument();
         }
 
-        public static void Go()
+        private static IEnumerable<SalesForceChange> ProcesChanges(IEnumerable<Change> changes)
         {
-            //var ns = XNamespace.Get("http://soap.sforce.com/2006/04/metadata");
+            return changes.Select(ChangeFactory.BuildSalesForceType).ToList();
+        }
+    }
 
-            XmlDocument doc = new XmlDocument();
+    internal class ChangeFactory
+    {
+        private static readonly Dictionary<string, SalesForceType> MapSalesForceTypes = new Dictionary<string, SalesForceType>
+        {
+            { ".cls", SalesForceType.ApexClass },
+            { ".page", SalesForceType.ApexPage },
+            { ".component", SalesForceType.ApexComponent },
+            { ".trigger", SalesForceType.ApexTrigger },
+            { ".app", SalesForceType.CustomApplication },
+            { ".object", SalesForceType.CustomObject },
+            { ".tab", SalesForceType.CustomTab },
+            { ".resource", SalesForceType.StaticResource },
+            { ".workflow", SalesForceType.Workflow },
+            { ".remoteSite", SalesForceType.RemoteSiteSettings },
+            { ".pagelayout", SalesForceType.Layout}
+        };
 
-            //(1) the xml declaration is recommended, but not mandatory
-            XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-          
-            XmlElement root = doc.DocumentElement;
-            doc.InsertBefore(xmlDeclaration, root);
+        public static SalesForceChange BuildSalesForceType(Change change)
+        {
+            string ext = Path.GetExtension(change.Path);
+            string filename = Path.GetFileName(change.Path);
 
-            string ns = "http://soap.sforce.com/2006/04/metadata";
+            SalesForceType @type = SalesForceType.Unknown;
+            MapSalesForceTypes.TryGetValue("ext", out @type);
 
-            //(2) string.Empty makes cleaner code
-            XmlElement element1 = doc.CreateElement(string.Empty, "package", ns);
-            doc.AppendChild(element1);
+            return new SalesForceChange
+            {
+                FileName = filename,
+                ChangeType = change.Status,
+                SalesForceType = @type
+            };
+        }
+    }
 
-            XmlElement element2 = doc.CreateElement(string.Empty, "types", ns);
-            element1.AppendChild(element2);
+    public enum SalesForceType
+    {
+        ApexClass,
+        ApexPage,
+        ApexComponent,
+        ApexTrigger,
+        Workflow,
+        StaticResource,
+        CustomApplication,
+        CustomLabels,
+        CustomObject,
+        CustomTab,
+        RemoteSiteSettings,
+        Layout,
+        Unknown
+    }
 
-            XmlElement element3 = doc.CreateElement(string.Empty, "members", ns);
-            XmlText text1 = doc.CreateTextNode("text");
-            element3.AppendChild(text1);
-            element2.AppendChild(element3);
+    public class SalesForceChange
+    {
+        public string FileName { get; set; }
+        public SalesForceType SalesForceType { get; set; }
+        public GitChangeKind ChangeType { get; set; }
 
-            XmlElement element4 = doc.CreateElement(string.Empty, "name", ns);
-            XmlText text2 = doc.CreateTextNode("other text");
-
-            XmlElement version = doc.CreateElement(string.Empty, "version", ns);
-            XmlText versionText = doc.CreateTextNode("28.0");
-            version.AppendChild(versionText);
-            element1.AppendChild(version);
-            
-
-            element4.AppendChild(text2);
-            element2.AppendChild(element4);
-
-            doc.Save("D:\\document.xml");
-        } 
     }
 }
+

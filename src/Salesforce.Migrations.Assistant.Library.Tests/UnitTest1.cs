@@ -96,12 +96,5 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
                 }
             }
         }
-
-        [Test]
-        public void GetPackaging()
-        {
-             GeneratePackageFile.WithXMLOutput();
-
-        }
-}
+    }
 }

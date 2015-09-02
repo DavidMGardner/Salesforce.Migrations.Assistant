@@ -33,11 +33,11 @@ namespace Salesforce.Migrations.Assistant.Library
         {
             SMALGit migrationassist = new SMALGit(_workingDirectory, _gitCommit);
 
-            var changes = migrationassist.GetTreeChanges(_gitBranch);
+            IEnumerable<Change> changes = migrationassist.GetTreeChanges(_gitBranch);
 
-            GeneratePackageFile.WithXMLOutput();
-
-            return null;
+            XmlDocument output = GeneratePackageFile.GenerateOutputXml(changes);
+            
+            return output;
         }
     }
 }

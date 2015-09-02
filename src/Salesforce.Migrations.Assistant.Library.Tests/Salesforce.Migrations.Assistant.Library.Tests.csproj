@@ -65,6 +65,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommandLineTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\Salesforce.Migrations.Assistant.Library\Salesforce.Migrations.Assistant.Library.csproj">
       <Project>{2e2024ab-daa3-45e7-8fa6-2076b889bf98}</Project>
       <Name>Salesforce.Migrations.Assistant.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesforceMigrations\SalesforceMigrations.csproj">
+      <Project>{4ed0b12d-92e2-4749-9934-a32925cb915e}</Project>
+      <Name>SalesforceMigrations</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
