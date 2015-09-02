@@ -11,11 +11,12 @@ namespace Salesforce.Migrations.Assistant.Library
     public class SMALGit
     {
         private readonly Repository _repository;
+        private string _prevCommit;
+        private string _curCommit;
+
 
         private List<String> additions, deletions, modificationsOld, modificationsNew, contents;
-        public string PrevCommit { get; }
-        public string CurCommit { get; }
-
+        
         public SMALGit()
         {
             
@@ -29,15 +30,15 @@ namespace Salesforce.Migrations.Assistant.Library
         public SMALGit(string pathToRepo, string curCommit)
         {
             _repository = new Repository(pathToRepo);
-            CurCommit = curCommit;
+            _curCommit = curCommit;
 
         }
 
         public SMALGit(string pathToRepo, string curCommit, string prevCommit)
         {
             _repository = new Repository(pathToRepo);
-            CurCommit = curCommit;
-            PrevCommit = prevCommit;
+            _curCommit = curCommit;
+            _prevCommit = prevCommit;
         }
 
         public void Dispose()
@@ -52,14 +53,14 @@ namespace Salesforce.Migrations.Assistant.Library
 
         private Commit TryAndGetCurrentCommit(Branch gitBranch)
         {
-            if (String.IsNullOrWhiteSpace(CurCommit))
+            if (String.IsNullOrWhiteSpace(_curCommit))
             {
                 return gitBranch.Commits.FirstOrDefault();
             }
             else
             {
                 ObjectId commitId;
-                if (ObjectId.TryParse(CurCommit, out commitId))
+                if (ObjectId.TryParse(_curCommit, out commitId))
                 {
                     return gitBranch.Commits.First(w => w.Id == commitId);
                 }
@@ -69,14 +70,14 @@ namespace Salesforce.Migrations.Assistant.Library
 
         private Commit TryAndGetPreviousCommit(Branch gitBranch)
         {
-            if (String.IsNullOrWhiteSpace(PrevCommit))
+            if (String.IsNullOrWhiteSpace(_prevCommit))
             {
                 return gitBranch.Commits.Skip(1).First();
             }
             else
             {
                 ObjectId commitId;
-                if (ObjectId.TryParse(PrevCommit, out commitId))
+                if (ObjectId.TryParse(_prevCommit, out commitId))
                 {
                     return gitBranch.Commits.First(w => w.Id == commitId);
                 }
