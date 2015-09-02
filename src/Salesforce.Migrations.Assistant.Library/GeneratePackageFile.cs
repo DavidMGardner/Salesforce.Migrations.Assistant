@@ -97,7 +97,6 @@ namespace Salesforce.Migrations.Assistant.Library
         public string FileName { get; set; }
         public SalesForceType SalesForceType { get; set; }
         public GitChangeKind ChangeType { get; set; }
-
     }
 }
 
