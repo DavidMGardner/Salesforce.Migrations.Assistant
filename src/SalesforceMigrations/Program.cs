@@ -39,6 +39,8 @@ namespace SalesforceMigrations
             // ReSharper disable once UseStringInterpolation
             document.Save(string.Format("{0}\\package.xml", buildOutputDirectory));
 
+            Console.WriteLine("XML Output {0}", document.ToString());
+
         }
     }
 }
