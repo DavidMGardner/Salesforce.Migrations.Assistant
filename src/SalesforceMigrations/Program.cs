@@ -14,7 +14,11 @@ namespace SalesforceMigrations
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(args);
+            foreach (var s in args)
+            {
+                Console.WriteLine("Arg: {0}", s);
+            }
+            
 
             try
             {
