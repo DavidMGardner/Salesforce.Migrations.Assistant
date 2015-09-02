@@ -14,7 +14,17 @@ namespace SalesforceMigrations
     {
         public static void Main(string[] args)
         {
-            Parser.Run<CommadParser>(args);
+            Console.WriteLine(args);
+
+            try
+            {
+                Parser.Run<CommadParser>(args);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: {0}", ex.Message);
+            }
+            
         }
     }
 
