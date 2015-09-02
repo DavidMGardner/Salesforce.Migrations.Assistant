@@ -29,13 +29,11 @@ namespace Salesforce.Migrations.Assistant.Library
             _gitCommit = gitCommit;
         }
 
-        private XmlDocument BuildPackageFile()
+        public XmlDocument BuildPackageFile()
         {
             SMALGit migrationassist = new SMALGit(_workingDirectory, _gitCommit);
 
             var changes = migrationassist.GetTreeChanges(_gitBranch);
-
-
 
             GeneratePackageFile.WithXMLOutput();
 

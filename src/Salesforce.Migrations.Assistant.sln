@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salesforce.Migrations.Assis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salesforce.Migrations.Assistant.Library", "Salesforce.Migrations.Assistant.Library\Salesforce.Migrations.Assistant.Library.csproj", "{2E2024AB-DAA3-45E7-8FA6-2076B889BF98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesforceMigrations", "SalesforceMigrations\SalesforceMigrations.csproj", "{4ED0B12D-92E2-4749-9934-A32925CB915E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2E2024AB-DAA3-45E7-8FA6-2076B889BF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E2024AB-DAA3-45E7-8FA6-2076B889BF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E2024AB-DAA3-45E7-8FA6-2076B889BF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED0B12D-92E2-4749-9934-A32925CB915E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED0B12D-92E2-4749-9934-A32925CB915E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED0B12D-92E2-4749-9934-A32925CB915E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED0B12D-92E2-4749-9934-A32925CB915E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
