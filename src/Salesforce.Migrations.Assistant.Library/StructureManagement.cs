@@ -37,7 +37,21 @@ namespace Salesforce.Migrations.Assistant.Library
             }
         }
 
-        public static string ManifestRelativeLocation => String.Format("artifacts\\{0}", ConfigurationManager.AppSettings["manifestLocation"]);
-        public static string SourceRelativeLocation => String.Format("artifacts\\{0}", ConfigurationManager.AppSettings["srcLocation"]);
+        public static string ManifestRelativeLocation
+        {
+            get
+            {
+                return String.Format("artifacts\\{0}", ConfigurationManager.AppSettings["manifestLocation"]);
+            }
+        }
+
+
+        public static string SourceRelativeLocation
+        {
+            get
+            {
+                return String.Format("artifacts\\{0}", ConfigurationManager.AppSettings["srcLocation"]);
+            }  
+        } 
     }
 }
