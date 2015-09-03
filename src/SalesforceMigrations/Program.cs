@@ -18,7 +18,6 @@ namespace SalesforceMigrations
             {
                 Console.WriteLine("Arg: {0}", s);
             }
-            
 
             try
             {

@@ -28,7 +28,7 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
                 @"-buildOutputDirectory=D:\code\SalesforceDevelopment\temp",
                 @"-gitUrl=https://github.com/DavidMGardner/DFS-SalesForce.git",
                 @"-gitBranch=origin/develop",
-                @"-gitCommit=c22310bd4e6f7a82060283ed63c9eccfb6621fa4"
+                @"-gitCommit=860a18ff6d0a6700f689521bd64d6460020e560c"
             });
         }
     }
