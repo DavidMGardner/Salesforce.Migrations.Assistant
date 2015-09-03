@@ -50,11 +50,25 @@ namespace SalesforceMigrations
 
             XmlDocument document = smab.BuildPackageFile();
 
-            // ReSharper disable once UseStringInterpolation
-            document.Save(string.Format("{0}\\package.xml", buildOutputDirectory));
+            if (document != null)
+            {
+                if (StructureManagement.BuildFileSystemStructure(buildOutputDirectory))
+                {
+                    // ReSharper disable once UseStringInterpolation
+                    string formattedfilename = string.Format("{0}\\{1}", buildOutputDirectory,
+                        StructureManagement.ManifestRelativeLocation);
 
-            Console.WriteLine("XML Output {0}", document.ToString());
+                    // ReSharper disable once UseStringInterpolation
+                    document.Save(string.Format("{0}\\package.xml",formattedfilename));
 
+                    // ReSharper disable once UseStringInterpolation
+                    System.IO.File.WriteAllText(string.Format("{0}\\change.log", formattedfilename), smab.GetChangeDetails);
+                    
+
+                    Console.WriteLine("XML Output {0}", document.InnerXml);
+                }
+                
+            }
         }
     }
 }

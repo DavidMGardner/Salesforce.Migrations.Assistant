@@ -85,6 +85,24 @@ namespace Salesforce.Migrations.Assistant.Library
             return null;
         }
 
+        public CommitDetails GetCommitComment(string branch)
+        {
+            var gitBranch = _repository.Branches[branch];
+            var gitCurrentCommit = TryAndGetCurrentCommit(gitBranch);
+
+            if (gitCurrentCommit != null)
+            {
+                return new CommitDetails
+                {
+                    Message = gitCurrentCommit.Message,
+                    AuthorName = gitCurrentCommit.Author.Name,
+                    AuthorEmail = gitCurrentCommit.Author.Email
+                };
+            }
+
+            return null;
+        }
+
         public IEnumerable<Change> GetTreeChanges(string branch)
         {
             var gitBranch = _repository.Branches[branch];
@@ -185,6 +203,13 @@ namespace Salesforce.Migrations.Assistant.Library
         }
 
 
+    }
+
+    public class CommitDetails
+    {
+        public string Message { get; set; }
+        public string AuthorEmail { get; set; }
+        public string AuthorName { get; set; }
     }
 
     public enum GitChangeKind

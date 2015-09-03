@@ -35,9 +35,30 @@ namespace Salesforce.Migrations.Assistant.Library
 
             IEnumerable<Change> changes = migrationassist.GetTreeChanges(_gitBranch);
 
-            XmlDocument output = GeneratePackageFile.GenerateOutputXml(changes);
-            
-            return output;
+            var enumerable = changes as IList<Change> ?? changes.ToList();
+            if (enumerable.Any())
+            {
+                XmlDocument output = GeneratePackageFile.GenerateOutputXml(enumerable);
+
+                return output;
+            }
+
+            return null;
+        }
+
+        public string GetChangeDetails
+        {
+            get
+            {
+                SMALGit migrationassist = new SMALGit(_workingDirectory, _gitCommit);
+                var comment = migrationassist.GetCommitComment(_gitBranch);
+                if (comment != null)
+                {
+                    return String.Format("Commited by: {1} ({2}) Comment: {0} ", comment.Message, comment.AuthorName, comment.AuthorEmail);
+                }
+
+                return String.Empty;
+            }
         }
     }
 }
