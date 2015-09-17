@@ -51,6 +51,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -60,18 +64,413 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="CommandLineTests.cs" />
+    <Compile Include="Service References\MetaDataServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SforceServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="SalesforceMetaDataService.wsdl" />
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.AsyncResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.cancelDeployResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.CancelDeployResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.checkDeployStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.checkRetrieveStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.createMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.DebuggingInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.deleteMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.DeleteResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.deployRecentValidationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.deployResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.DeployResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.describeMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.DescribeMetadataResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.describeValueTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.FileProperties.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.listMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.Metadata.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.readMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.renameMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.retrieveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.RetrieveResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.SaveResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.updateMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.upsertMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.UpsertResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\Salesforce.Migrations.Assistant.Library.Tests.MetaDataServiceReference.ValueTypeField.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetaDataServiceReference\SalesforceMetaDataService.wsdl" />
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.convertLeadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.createResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DebuggingInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.deleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DeleteResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeAllTabsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeAppMenuItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeAppMenuResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeApprovalLayout.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeApprovalLayoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeAvailableQuickActionResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeAvailableQuickActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeCompactLayout.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeCompactLayoutsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeCompactLayoutsResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeDataCategoryGroupResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeDataCategoryGroupsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeDataCategoryGroupStructureResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeDataCategoryGroupStructuresResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeFlexiPageResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeFlexiPagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeGlobalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeGlobalResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeGlobalTheme.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeGlobalThemeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeKnowledgeSettingsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeLayoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeLayoutResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeNounResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeNounsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describePrimaryCompactLayoutsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeQuickActionResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeQuickActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeSearchLayoutResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSearchLayoutsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSearchScopeOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeSearchScopeOrderResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSObjectListViewsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSObjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeSObjectResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSObjectsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSoftphoneLayoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeSoftphoneLayoutResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeSoqlListView.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeSoqlListViewsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeTab.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeTabSetResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeTabsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.DescribeThemeItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.describeThemeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.emptyRecycleBinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.EmptyRecycleBinResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.executeListViewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.ExecuteListViewResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.getDeletedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.GetDeletedResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.getServerTimestampResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.GetServerTimestampResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.getUpdatedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.GetUpdatedResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.getUserInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.GetUserInfoResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.invalidateSessionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.InvalidateSessionsResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.KnowledgeSettings.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.LeadConvertResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.LimitInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.loginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.LoginResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.logoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.mergeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.MergeResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.PerformQuickActionResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.performQuickActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.processResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.ProcessResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.queryAllResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.queryMoreResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.queryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.QueryResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.QuickActionTemplateResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.resetPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.ResetPasswordResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.retrieveQuickActionTemplatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.retrieveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.SaveResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.searchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.SearchResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.sendEmailMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.sendEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.SendEmailResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.setPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.SetPasswordResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.sObject.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.undeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.UndeleteResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.updateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.upsertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\Salesforce.Migrations.Assistant.Library.Tests.SforceServiceReference.UpsertResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SforceServiceReference\SforceService.wsdl" />
+    <None Include="SforceService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Salesforce.Migrations.Assistant.Library\Salesforce.Migrations.Assistant.Library.csproj">
@@ -82,6 +481,37 @@
       <Project>{4ed0b12d-92e2-4749-9934-a32925cb915e}</Project>
       <Name>SalesforceMigrations</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MetaDataServiceReference\" />
+    <WCFMetadataStorage Include="Service References\SforceServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SforceServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SforceServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SforceServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetaDataServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetaDataServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetaDataServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

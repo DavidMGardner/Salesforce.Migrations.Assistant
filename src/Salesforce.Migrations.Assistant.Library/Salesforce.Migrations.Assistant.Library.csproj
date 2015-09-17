@@ -33,13 +33,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip, Version=1.9.6.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.9.6\lib\net20\Ionic.Zip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LibGit2Sharp, Version=0.21.0.176, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LibGit2Sharp.0.21.0.176\lib\net40\LibGit2Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moo, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moo.0.9.1\lib\net40\Moo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MurmurHash, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\murmurhash.1.0.0\lib\net45\MurmurHash.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.1.5.11\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.1.5.11\lib\net45\Serilog.FullNetFx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -47,21 +74,74 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\CryptographyProvider.cs" />
+    <Compile Include="DomainAttributes\AllowsWildcardAttribute.cs" />
+    <Compile Include="DomainAttributes\DisplayNameAttribute.cs" />
+    <Compile Include="DomainAttributes\FileExtensionAttribute.cs" />
+    <Compile Include="DomainAttributes\FolderAttribute.cs" />
+    <Compile Include="DomainAttributes\IncludedByDefaultAttribute.cs" />
+    <Compile Include="DomainAttributes\MetadataSubTypeAttribute.cs" />
+    <Compile Include="DomainAttributes\SalesforceDirectory.cs" />
+    <Compile Include="DomainAttributes\SupportedAttribute.cs" />
+    <Compile Include="Domain\ApexMemberProxy.cs" />
+    <Compile Include="Domain\DeploymentTestResultType.cs" />
+    <Compile Include="Domain\DeployResult.cs" />
+    <Compile Include="Domain\DeployTestResult.cs" />
+    <Compile Include="Domain\ErrorDescriptor.cs" />
+    <Compile Include="Domain\ICompilableItem.cs" />
+    <Compile Include="Domain\IDeployableItem.cs" />
+    <Compile Include="Domain\ISalesforceItem.cs" />
+    <Compile Include="Domain\ISalesforceMetadataContainer.cs" />
+    <Compile Include="Domain\IStaticResource.cs" />
+    <Compile Include="Domain\LogDescriptor.cs" />
+    <Compile Include="Domain\MetadataTypeEnums.cs" />
+    <Compile Include="Domain\OperationResult.cs" />
+    <Compile Include="Domain\DeployOptions.cs" />
+    <Compile Include="Domain\PackageEntity.cs" />
+    <Compile Include="Domain\SalesforceFileNode.cs" />
+    <Compile Include="Domain\SalesforceFileProxy.cs" />
+    <Compile Include="Domain\SalesforceItem.cs" />
+    <Compile Include="Domain\StaticResourceContainerNode.cs" />
+    <Compile Include="Domain\TestClass.cs" />
+    <Compile Include="Domain\TestQueueItem.cs" />
+    <Compile Include="Domain\TestResult.cs" />
     <Compile Include="GeneratePackageFile.cs" />
+    <Compile Include="ISalesforceDomainServices.cs" />
+    <Compile Include="Services\ISalesforcePartnerServiceAdapter.cs" />
+    <Compile Include="Services\ISalesforceToolingServiceAdapter.cs" />
+    <Compile Include="Services\SalesforceMetadataServiceAdapter.cs" />
+    <Compile Include="Services\ISaleforceMetadataServiceAdapter.cs" />
+    <Compile Include="Services\SalesforcePartnerServiceAdapter.cs" />
+    <Compile Include="Services\SalesforceToolingServiceAdapter.cs" />
+    <Compile Include="WSDL\EnterpriseSforceService.cs" />
+    <Compile Include="WSDL\MetadataService.cs" />
+    <Compile Include="SalesforceDomainServices.cs" />
     <Compile Include="SalesForceMigrationsAssistantBuild.cs" />
     <Compile Include="SMALGit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureManagement.cs" />
+    <Compile Include="WSDL\PartnerSforceService.cs" />
+    <Compile Include="WSDL\ToolingSforceService.cs" />
     <Compile Include="XMLOutput.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="WSDL\ApexService.wsdl" />
+    <None Include="WSDL\MetaDataService.wsdl" />
     <None Include="packages.config" />
+    <None Include="WSDL\PartnerSforceService.wsdl" />
+    <None Include="WSDL\EnterpriseSforceService.wsdl" />
+    <None Include="WSDL\ToolingSforceService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sample.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
