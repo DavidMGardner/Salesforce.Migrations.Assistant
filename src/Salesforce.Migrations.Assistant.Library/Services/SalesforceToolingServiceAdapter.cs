@@ -22,7 +22,13 @@ namespace Salesforce.Migrations.Assistant.Library.Services
         }
 
         public string Url { get; set; }
-        public SessionHeader SessionHeader { get; set; }
+
+        public SessionHeader SessionHeader
+        {
+            get { return _service.SessionHeaderValue; }
+            set { _service.SessionHeaderValue = value; }
+        }
+
         public ExecuteAnonymousResult ExecuteAnonymous(string apexToExecute)
         {
             return _service.executeAnonymous(apexToExecute);

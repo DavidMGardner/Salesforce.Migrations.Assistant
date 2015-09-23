@@ -1,0 +1,2106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="ea9b5445-556e-48ad-865e-ce3cfbeaaf17"
+  name="HttpCallsForEMEACustomerPortal" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction
+        Id="6d4b8c8f-c7d9-4049-85f8-2a1eeddb6148"
+        name="Sequence1"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <ownedCommentsInternal>
+          <comment
+            Id="60df4ed3-0c28-4709-a009-f2542ede2644">
+            <body>Url: http://&lt;sfdc&gt;/CP_ContractsListPage</body>
+          </comment>
+        </ownedCommentsInternal>
+        <fragments>
+          <messageOccurrenceSpecification
+            Id="72099826-65d3-40fd-8f6a-51356ad6670b"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="8b851710-5e44-4ce1-9b59-9bccf81e789a"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="a6ce2530-f4f9-45a5-940a-df5ec98d4a76"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="12688e59-fe67-4f3f-aa7c-564cf3f3f5be"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="7f683fd5-2273-4065-bf07-f3b1df94c853"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="22e2ef73-0617-46f9-acde-cad56d30603f"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f58eef1e-1a16-4b4c-979b-8ee5016c9d01"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c6737805-39d6-4d37-8758-2d14cbbd410d"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="12688e59-fe67-4f3f-aa7c-564cf3f3f5be"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bd68fcba-7652-462a-8d7d-3a323d70ba35"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7f683fd5-2273-4065-bf07-f3b1df94c853"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="f1b6dec2-df8d-4c3e-ba7f-631b57cfad3e"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ce28abd9-2e5c-4608-8aeb-9f92d7afe7bf"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="064a9a36-ca45-4b6b-8eb6-f6c24368ed87"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="a4575259-74a5-48d4-b025-812ee00db2d2"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="88729060-fb37-4701-a820-cd2e6841f851"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="bda6e5aa-01b0-4e3f-a11a-ef6563fdb5c6"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="cd290992-67b0-48e0-8d87-457ae17a58bd"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="064a9a36-ca45-4b6b-8eb6-f6c24368ed87"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f12f8d93-c5e0-4c26-be5d-5531eed96cc4"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b070edd4-878b-4e4f-b2a7-1cfddc6d8e93"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a4575259-74a5-48d4-b025-812ee00db2d2"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="7089d8d4-7ea7-448f-8f1f-2d052171fc87"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="f9efa9df-54ac-43d4-97a4-072d77656c9b"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="99dad980-7b16-4862-be43-80219d4a321f"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ecc62808-49b9-4c1b-9720-d1e9a0428f83"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="70094de0-47ff-44d7-869a-cdb72549f5ce"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="efebcdce-d2d6-4ea0-9e86-392bd75e3dfe"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e4a62e71-ddac-4084-af8d-f340b7cb9b41"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="265e65aa-f797-4814-95fa-a6708ebc3223"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="53ba5886-7547-4507-997f-7ce5b392b105"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="99dad980-7b16-4862-be43-80219d4a321f"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ff5ae114-6666-44b8-8be8-569cc0c0ddb5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ecc62808-49b9-4c1b-9720-d1e9a0428f83"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="88729060-fb37-4701-a820-cd2e6841f851"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="22e2ef73-0617-46f9-acde-cad56d30603f"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="f3c5511d-c187-426b-a3b4-dc180313c033"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="c6737805-39d6-4d37-8758-2d14cbbd410d"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f58eef1e-1a16-4b4c-979b-8ee5016c9d01"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="90ed2b5a-f0cd-4a23-8ab3-ee50765e4ad4"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f58eef1e-1a16-4b4c-979b-8ee5016c9d01"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3db9cb70-f15e-46d1-9ad7-e09c2f57a540"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="90ed2b5a-f0cd-4a23-8ab3-ee50765e4ad4"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="504e9db3-cb02-42cc-b635-f56a99a32461"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+                LastKnownName="CP_COM_SiteTemplate_Controller"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ffb6968a-b701-4ecb-bf8e-0ed9c9a114d5"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="2a936780-5b7d-47b5-b72b-16e33926a8c0"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="2c48eb2a-ca1f-43df-b0ae-56788e04867e"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1db9a482-7572-4256-8022-f84726bd1256"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="2a936780-5b7d-47b5-b72b-16e33926a8c0"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="42bc48ed-c747-4499-8d27-62b3ffac7733"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+                LastKnownName="CP_COM_SiteTemplate_Controller"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2c48eb2a-ca1f-43df-b0ae-56788e04867e"
+            name="MessageOccurrenceSpecification14">
+            <covered>
+              <lifelineMoniker
+                Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+                LastKnownName="CP_COM_SiteTemplate_Controller"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="70094de0-47ff-44d7-869a-cdb72549f5ce"
+            name="MessageOccurrenceSpecification13">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="c6737805-39d6-4d37-8758-2d14cbbd410d"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8999df9a-8530-4377-927b-8599b74564b4"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1db9a482-7572-4256-8022-f84726bd1256"
+            name="MessageOccurrenceSpecification15">
+            <covered>
+              <lifelineMoniker
+                Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+                LastKnownName="CP_COM_SiteTemplate_Controller"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="efebcdce-d2d6-4ea0-9e86-392bd75e3dfe"
+            name="MessageOccurrenceSpecification16">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ffb6968a-b701-4ecb-bf8e-0ed9c9a114d5"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bbf6140d-aafe-4536-9ede-32c0cea31395"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+                LastKnownName="CP_COM_SiteTemplate_Controller"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="a6ce2530-f4f9-45a5-940a-df5ec98d4a76"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="835cb0c5-3d7b-40cb-8acb-bb6036a0a577"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="8bf3d0d5-f7d5-4158-8f85-2181f4a39b8e"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+                LastKnownName="Salesforce DML"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2d188c81-7217-49a1-896b-2ddf4bfeb633"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ddc640c6-9acd-4cd1-8f88-a6d7ecf6cf7f"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="45ac0d23-02e2-440d-a908-8e773126fab1"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9ac2ef8b-b769-455f-a72c-81a45072410d"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ddc640c6-9acd-4cd1-8f88-a6d7ecf6cf7f"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2029d6c6-fd11-4f06-89f5-577e42b60498"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+                LastKnownName="Salesforce DML"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="45ac0d23-02e2-440d-a908-8e773126fab1"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+                LastKnownName="Salesforce DML"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e4a62e71-ddac-4084-af8d-f340b7cb9b41"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="265e65aa-f797-4814-95fa-a6708ebc3223"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9ac2ef8b-b769-455f-a72c-81a45072410d"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+                LastKnownName="Salesforce DML"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2d188c81-7217-49a1-896b-2ddf4bfeb633"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9467fd9e-cee1-4ad4-9b0e-717c93319f33"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+                LastKnownName="Salesforce DML"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="53ba5886-7547-4507-997f-7ce5b392b105"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="bda6e5aa-01b0-4e3f-a11a-ef6563fdb5c6"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="f9efa9df-54ac-43d4-97a4-072d77656c9b"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2a7aaaa1-76bb-4d35-9fe4-6aa37044655e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="cd290992-67b0-48e0-8d87-457ae17a58bd"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ebf7694e-3e0f-41be-b27e-b34c6ee90123"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ce28abd9-2e5c-4608-8aeb-9f92d7afe7bf"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="339a97e6-0cae-4278-b3aa-9b2e78786cc6"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="d5a151f6-6978-4a95-b9d2-147497a7ea0e"
+            name="BehaviorExecutionSpecification10">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="c24b725c-a4db-499e-bf85-1aaeedcf7e79"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="08bf497c-c76a-4040-8077-614836f05126"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="df7bd775-2b11-499e-8b90-ed3cf8b70a39"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="07cc3084-1a80-40ca-b48d-e8c39b33860c"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="08bf497c-c76a-4040-8077-614836f05126"
+            name="ExecutionOccurrenceSpecification19">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c52b886e-912b-4f7d-b95a-ea3ab02f3ab3"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="df7bd775-2b11-499e-8b90-ed3cf8b70a39"
+            name="MessageOccurrenceSpecification32">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1f7e02b2-1c23-444d-83e0-92d2d2b4661d"
+            name="MessageOccurrenceSpecification31">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="46ac1449-668a-4226-92a7-d80d1ebab696"
+            name="BehaviorExecutionSpecification11">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="a7456299-e152-4aaf-a4af-4107a353670d"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="93f9e00d-a8d0-4dbe-875b-a424c1f9661d"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="72c96c45-983e-430a-b6e0-4eb9040892d0"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="5d54da88-cba9-4c4d-a53d-5ff8c1e51461"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="93f9e00d-a8d0-4dbe-875b-a424c1f9661d"
+            name="ExecutionOccurrenceSpecification21">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="0e51c1fb-60ec-48c4-8472-94c746e60a1d"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="07cc3084-1a80-40ca-b48d-e8c39b33860c"
+            name="MessageOccurrenceSpecification33">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="72c96c45-983e-430a-b6e0-4eb9040892d0"
+            name="MessageOccurrenceSpecification34">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="c24b725c-a4db-499e-bf85-1aaeedcf7e79"
+            name="ExecutionOccurrenceSpecification20">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="daa30ec6-9e86-4d58-b958-898163b64044"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="1bd87aed-2d87-4508-a4ca-2a2ce86e0e43"
+            name="BehaviorExecutionSpecification13">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="600d6ae9-7343-4ea2-bbb5-9fb6acea274d"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="04462024-888b-4169-9827-ce7d1d7432d6"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6a32fe97-932c-4538-af2e-cc619527692e"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="8874cf4e-21d8-459a-838a-6c2a1879d694"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4390d23c-603f-4d2c-8d94-0d6ef51aea2e"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="176acb80-fca6-48ae-ba80-b1e7f3fbea60"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="04462024-888b-4169-9827-ce7d1d7432d6"
+            name="ExecutionOccurrenceSpecification25">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1a5481aa-13c8-4207-ac95-62ecbd25a780"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5d54da88-cba9-4c4d-a53d-5ff8c1e51461"
+            name="MessageOccurrenceSpecification37">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6a32fe97-932c-4538-af2e-cc619527692e"
+            name="MessageOccurrenceSpecification38">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="75eaf1ec-5a97-4e4b-b243-e6bac9c9a911"
+            name="BehaviorExecutionSpecification14">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+                LastKnownName="CP_CustomerContractListController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2682f811-4fcc-45e2-9602-5ecbac4f728b"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="23f32006-2a28-46c5-bd72-fed4214515e6"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d187cab1-7429-4546-81d0-2a83981ca0d6"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6a72b16e-d26d-48f1-ae9f-754206290e24"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="23f32006-2a28-46c5-bd72-fed4214515e6"
+            name="ExecutionOccurrenceSpecification27">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3cd32d39-b724-4e85-9f23-a5ebcc89a55b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+                LastKnownName="CP_CustomerContractListController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8874cf4e-21d8-459a-838a-6c2a1879d694"
+            name="MessageOccurrenceSpecification39">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d187cab1-7429-4546-81d0-2a83981ca0d6"
+            name="MessageOccurrenceSpecification40">
+            <covered>
+              <lifelineMoniker
+                Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+                LastKnownName="CP_CustomerContractListController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4390d23c-603f-4d2c-8d94-0d6ef51aea2e"
+            name="MessageOccurrenceSpecification42">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6a72b16e-d26d-48f1-ae9f-754206290e24"
+            name="MessageOccurrenceSpecification41">
+            <covered>
+              <lifelineMoniker
+                Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+                LastKnownName="CP_CustomerContractListController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2682f811-4fcc-45e2-9602-5ecbac4f728b"
+            name="ExecutionOccurrenceSpecification28">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="24d88201-f9c0-43f1-a9bb-2a27331331f7"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+                LastKnownName="CP_CustomerContractListController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="57669826-d24c-44d9-aaeb-2fa52a57d629"
+            name="BehaviorExecutionSpecification15">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5693b872-7068-497c-9b7b-285026e09f1f"
+                LastKnownName="ExecutionOccurrenceSpecification30"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="750ac5af-dc8c-4212-9d77-a1bab18a2bb4"
+                LastKnownName="ExecutionOccurrenceSpecification29"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6f58566e-da49-4f11-be15-8b6c5b5dc571"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e31bce7c-f40e-41e7-baf3-062a4dc4adba"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="750ac5af-dc8c-4212-9d77-a1bab18a2bb4"
+            name="ExecutionOccurrenceSpecification29">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="21c1da5f-e969-474f-86e1-1e0b0750eec5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="176acb80-fca6-48ae-ba80-b1e7f3fbea60"
+            name="MessageOccurrenceSpecification43">
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6f58566e-da49-4f11-be15-8b6c5b5dc571"
+            name="MessageOccurrenceSpecification44">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="600d6ae9-7343-4ea2-bbb5-9fb6acea274d"
+            name="ExecutionOccurrenceSpecification26">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="cf7955f6-64ed-444c-94be-2a7423d773de"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+                LastKnownName="CP_ContractsListPageController"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="9ce40171-ee7e-4a5e-9d10-f8a56e8b19ef"
+            name="BehaviorExecutionSpecification16">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="563c835b-b874-4cd3-8e26-6d9547624404"
+                LastKnownName="ExecutionOccurrenceSpecification32"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="b9ad45de-1d6d-4012-87b8-84185c7ca51d"
+                LastKnownName="ExecutionOccurrenceSpecification31"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="29160c85-7845-44eb-9751-7b0837697174"
+                LastKnownName="MessageOccurrenceSpecification46"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="b8f18db2-e0fe-40e5-84e7-90d17877d6c1"
+                LastKnownName="MessageOccurrenceSpecification47"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a9b83ce0-956a-4438-97f2-72ff11bacd83"
+                LastKnownName="ExecutionOccurrenceSpecification33"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="32a7d3cb-c81f-40e3-a360-bf01dece4115"
+                LastKnownName="ExecutionOccurrenceSpecification34"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="b9ad45de-1d6d-4012-87b8-84185c7ca51d"
+            name="ExecutionOccurrenceSpecification31">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="482b3a9f-2dc3-4447-a96b-b79de052037b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="29160c85-7845-44eb-9751-7b0837697174"
+            name="MessageOccurrenceSpecification46">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e31bce7c-f40e-41e7-baf3-062a4dc4adba"
+            name="MessageOccurrenceSpecification45">
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5693b872-7068-497c-9b7b-285026e09f1f"
+            name="ExecutionOccurrenceSpecification30">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="71451a87-1ab2-4025-b36a-401ba2e899cf"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c37f441e-1437-4620-b3a3-555c004012d7"
+                LastKnownName="CP_ContractsListPage"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b8f18db2-e0fe-40e5-84e7-90d17877d6c1"
+            name="MessageOccurrenceSpecification47">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="540be223-289b-4c74-8a41-3cb539b21bc9"
+            name="BehaviorExecutionSpecification17">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="32a7d3cb-c81f-40e3-a360-bf01dece4115"
+                LastKnownName="ExecutionOccurrenceSpecification34"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="a9b83ce0-956a-4438-97f2-72ff11bacd83"
+                LastKnownName="ExecutionOccurrenceSpecification33"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="79866758-1ba9-4299-8a99-670e21a02fa7"
+                LastKnownName="MessageOccurrenceSpecification48"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="653b72ff-7232-4e96-99ce-5324ee4f8b9d"
+                LastKnownName="MessageOccurrenceSpecification49"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="a9b83ce0-956a-4438-97f2-72ff11bacd83"
+            name="ExecutionOccurrenceSpecification33">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="49685b9b-eb5f-414b-a305-a7bc20304161"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="79866758-1ba9-4299-8a99-670e21a02fa7"
+            name="MessageOccurrenceSpecification48">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="a7456299-e152-4aaf-a4af-4107a353670d"
+            name="ExecutionOccurrenceSpecification22">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ea8aded8-46b4-4e65-9ea8-71e04ecd0116"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="c0e0c5d6-fed4-4eb8-a7f9-49c400c9ba96"
+            name="BehaviorExecutionSpecification18">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="aefa0052-e0d8-4a93-aafb-a73062f48449"
+                LastKnownName="ExecutionOccurrenceSpecification36"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="6806fc39-61cb-41f8-87b3-b053cfcb166d"
+                LastKnownName="ExecutionOccurrenceSpecification35"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6b5b8527-74c9-4b2a-a7ea-2e45b4ea8de5"
+                LastKnownName="MessageOccurrenceSpecification50"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="6806fc39-61cb-41f8-87b3-b053cfcb166d"
+            name="ExecutionOccurrenceSpecification35">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="13ae9859-cf59-4f1f-8875-f8d82939affc"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="653b72ff-7232-4e96-99ce-5324ee4f8b9d"
+            name="MessageOccurrenceSpecification49">
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6b5b8527-74c9-4b2a-a7ea-2e45b4ea8de5"
+            name="MessageOccurrenceSpecification50">
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="32a7d3cb-c81f-40e3-a360-bf01dece4115"
+            name="ExecutionOccurrenceSpecification34">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="97181e80-b7cd-4509-99ce-7bfdb656cb38"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="aefa0052-e0d8-4a93-aafb-a73062f48449"
+            name="ExecutionOccurrenceSpecification36">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="7a521923-2a04-49ab-83be-a204566ac16f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+                LastKnownName="Web Browser"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="563c835b-b874-4cd3-8e26-6d9547624404"
+            name="ExecutionOccurrenceSpecification32">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="89704397-ee0e-4bde-a8b5-8ea4eea37450"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+                LastKnownName="Angular App"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="8467dfc8-1ed4-4459-b2ed-e047ff9e69f0"
+            name="Web Browser"
+            isActor="false"
+            lifelineDisplayName="Web Browser">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="b070edd4-878b-4e4f-b2a7-1cfddc6d8e93"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="ebf7694e-3e0f-41be-b27e-b34c6ee90123"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1f7e02b2-1c23-444d-83e0-92d2d2b4661d"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="93f9e00d-a8d0-4dbe-875b-a424c1f9661d"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a7456299-e152-4aaf-a4af-4107a353670d"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="6806fc39-61cb-41f8-87b3-b053cfcb166d"
+                LastKnownName="ExecutionOccurrenceSpecification35"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="aefa0052-e0d8-4a93-aafb-a73062f48449"
+                LastKnownName="ExecutionOccurrenceSpecification36"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="e6be1728-ed18-4ffa-b485-85f18a83b633"
+            name="Angular App"
+            isActor="false"
+            lifelineDisplayName="Angular App">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="72099826-65d3-40fd-8f6a-51356ad6670b"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="12688e59-fe67-4f3f-aa7c-564cf3f3f5be"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a6ce2530-f4f9-45a5-940a-df5ec98d4a76"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="08bf497c-c76a-4040-8077-614836f05126"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c24b725c-a4db-499e-bf85-1aaeedcf7e79"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="b9ad45de-1d6d-4012-87b8-84185c7ca51d"
+                LastKnownName="ExecutionOccurrenceSpecification31"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="563c835b-b874-4cd3-8e26-6d9547624404"
+                LastKnownName="ExecutionOccurrenceSpecification32"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="c37f441e-1437-4620-b3a3-555c004012d7"
+            name="CP_ContractsListPage"
+            isActor="false"
+            lifelineDisplayName="CP_ContractsListPage">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="064a9a36-ca45-4b6b-8eb6-f6c24368ed87"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ce28abd9-2e5c-4608-8aeb-9f92d7afe7bf"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="750ac5af-dc8c-4212-9d77-a1bab18a2bb4"
+                LastKnownName="ExecutionOccurrenceSpecification29"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5693b872-7068-497c-9b7b-285026e09f1f"
+                LastKnownName="ExecutionOccurrenceSpecification30"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="06c9140a-817c-416c-bcc4-fbcf19a0b1c1"
+            name="CP_ContractsListPageController"
+            isActor="false"
+            lifelineDisplayName="CP_ContractsListPageController">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="99dad980-7b16-4862-be43-80219d4a321f"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f9efa9df-54ac-43d4-97a4-072d77656c9b"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="04462024-888b-4169-9827-ce7d1d7432d6"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="600d6ae9-7343-4ea2-bbb5-9fb6acea274d"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="afa0abb2-14a8-4359-b4d4-6780096357c0"
+            name="CP_COM_SiteTemplate_Controller"
+            isActor="false"
+            lifelineDisplayName="CP_COM_SiteTemplate_Controller">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="2a936780-5b7d-47b5-b72b-16e33926a8c0"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ffb6968a-b701-4ecb-bf8e-0ed9c9a114d5"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="6f51897f-7326-4f65-8bc6-70983cf4bfcd"
+            name="Salesforce DML"
+            isActor="false"
+            lifelineDisplayName="Salesforce DML">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="ddc640c6-9acd-4cd1-8f88-a6d7ecf6cf7f"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2d188c81-7217-49a1-896b-2ddf4bfeb633"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="b9939c3d-deea-47f4-aecc-fc49156ed6e0"
+            name="CP_CustomerContractListController"
+            isActor="false"
+            lifelineDisplayName="CP_CustomerContractListController">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="23f32006-2a28-46c5-bd72-fed4214515e6"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2682f811-4fcc-45e2-9602-5ecbac4f728b"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="bcaf8bce-1c5f-4d36-8aa1-b0d0019423bf"
+            name="Build up Controller"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="72099826-65d3-40fd-8f6a-51356ad6670b"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7f683fd5-2273-4065-bf07-f3b1df94c853"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="9a32fafe-8f3d-4425-950c-43f2aac6056b"
+            name="HttpGet"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b070edd4-878b-4e4f-b2a7-1cfddc6d8e93"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a4575259-74a5-48d4-b025-812ee00db2d2"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="aa850b74-0cd0-4eed-866f-6f2c11142311"
+            name="ctor"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="88729060-fb37-4701-a820-cd2e6841f851"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ecc62808-49b9-4c1b-9720-d1e9a0428f83"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="0883dded-0ab4-4605-bc53-c37165f00b71"
+            name="Build up Services"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="22e2ef73-0617-46f9-acde-cad56d30603f"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="90ed2b5a-f0cd-4a23-8ab3-ee50765e4ad4"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="bfaf64b6-611f-40db-95e6-67d79d30552c"
+            name="HandleSelectedCCanCookie"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="70094de0-47ff-44d7-869a-cdb72549f5ce"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2c48eb2a-ca1f-43df-b0ae-56788e04867e"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="6b69ab9e-f7b2-41b8-92b8-7ec6fe718527"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1db9a482-7572-4256-8022-f84726bd1256"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="efebcdce-d2d6-4ea0-9e86-392bd75e3dfe"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="b22bad9c-dfe3-48dc-9c8c-ca359f56228f"
+            name="GetUser"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e4a62e71-ddac-4084-af8d-f340b7cb9b41"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="45ac0d23-02e2-440d-a908-8e773126fab1"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c96d17f0-2324-4921-b32e-efa5e4ba82af"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9ac2ef8b-b769-455f-a72c-81a45072410d"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="265e65aa-f797-4814-95fa-a6708ebc3223"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ac36d23c-d4d6-4e48-a95e-ed226c8eafb4"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="53ba5886-7547-4507-997f-7ce5b392b105"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="bda6e5aa-01b0-4e3f-a11a-ef6563fdb5c6"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="1af5614c-0698-4c6a-b667-6423ea1af8ad"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="cd290992-67b0-48e0-8d87-457ae17a58bd"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ebf7694e-3e0f-41be-b27e-b34c6ee90123"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="41d7b4bf-7c85-403b-b7f5-03f49ddcd3d9"
+            name="getContracts"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1f7e02b2-1c23-444d-83e0-92d2d2b4661d"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="df7bd775-2b11-499e-8b90-ed3cf8b70a39"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="a37c36c0-2a02-4f41-9620-1c72ffbcc016"
+            name="getRemoteContracts"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="07cc3084-1a80-40ca-b48d-e8c39b33860c"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="72c96c45-983e-430a-b6e0-4eb9040892d0"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="537a3cbc-747e-436e-a232-eb645910ff3c"
+            name="$RemoteAction.CP_ContractsListHoverOverController.getList"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="5d54da88-cba9-4c4d-a53d-5ff8c1e51461"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6a32fe97-932c-4538-af2e-cc619527692e"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="7f0e7059-c118-4355-9563-eb25eaad5bf7"
+            name="getSearchValue(ccan, startIndex, endIndex, itemsPerPage)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8874cf4e-21d8-459a-838a-6c2a1879d694"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d187cab1-7429-4546-81d0-2a83981ca0d6"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="586c5acc-60d7-4d74-b1ba-54836150a92a"
+            name="Json"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6a72b16e-d26d-48f1-ae9f-754206290e24"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4390d23c-603f-4d2c-8d94-0d6ef51aea2e"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="35bd9311-a851-40b9-817d-0fea1d492a39"
+            name="JSON"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="176acb80-fca6-48ae-ba80-b1e7f3fbea60"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6f58566e-da49-4f11-be15-8b6c5b5dc571"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="62efd5b7-00ce-4b69-a431-cd59068b400d"
+            name="getRemoteContracts::function(Result)"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e31bce7c-f40e-41e7-baf3-062a4dc4adba"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="29160c85-7845-44eb-9751-7b0837697174"
+                LastKnownName="MessageOccurrenceSpecification46"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f045f71c-7567-4119-817d-2dfbe1f56e66"
+            name="controller::.then(function(result))"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b8f18db2-e0fe-40e5-84e7-90d17877d6c1"
+                LastKnownName="MessageOccurrenceSpecification47"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="79866758-1ba9-4299-8a99-670e21a02fa7"
+                LastKnownName="MessageOccurrenceSpecification48"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="7e428bda-3672-4c1c-9246-68735864d4a3"
+            name="render::scope.tabledata"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="653b72ff-7232-4e96-99ce-5324ee4f8b9d"
+                LastKnownName="MessageOccurrenceSpecification49"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6b5b8527-74c9-4b2a-a7ea-2e45b4ea8de5"
+                LastKnownName="MessageOccurrenceSpecification50"
+                LastKnownLocation="HttpCallsForEMEACustomerPortal.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f12f8d93-c5e0-4c26-be5d-5531eed96cc4"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="339a97e6-0cae-4278-b3aa-9b2e78786cc6"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ff5ae114-6666-44b8-8be8-569cc0c0ddb5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2a7aaaa1-76bb-4d35-9fe4-6aa37044655e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2029d6c6-fd11-4f06-89f5-577e42b60498"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9467fd9e-cee1-4ad4-9b0e-717c93319f33"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="42bc48ed-c747-4499-8d27-62b3ffac7733"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bbf6140d-aafe-4536-9ede-32c0cea31395"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bd68fcba-7652-462a-8d7d-3a323d70ba35"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="835cb0c5-3d7b-40cb-8acb-bb6036a0a577"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3db9cb70-f15e-46d1-9ad7-e09c2f57a540"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8999df9a-8530-4377-927b-8599b74564b4"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c52b886e-912b-4f7d-b95a-ea3ab02f3ab3"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="daa30ec6-9e86-4d58-b958-898163b64044"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="0e51c1fb-60ec-48c4-8472-94c746e60a1d"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ea8aded8-46b4-4e65-9ea8-71e04ecd0116"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1a5481aa-13c8-4207-ac95-62ecbd25a780"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="cf7955f6-64ed-444c-94be-2a7423d773de"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3cd32d39-b724-4e85-9f23-a5ebcc89a55b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="24d88201-f9c0-43f1-a9bb-2a27331331f7"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="21c1da5f-e969-474f-86e1-1e0b0750eec5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="71451a87-1ab2-4025-b36a-401ba2e899cf"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="482b3a9f-2dc3-4447-a96b-b79de052037b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="89704397-ee0e-4bde-a8b5-8ea4eea37450"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="49685b9b-eb5f-414b-a305-a7bc20304161"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="97181e80-b7cd-4509-99ce-7bfdb656cb38"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="13ae9859-cf59-4f1f-8875-f8d82939affc"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="7a521923-2a04-49ab-83be-a204566ac16f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

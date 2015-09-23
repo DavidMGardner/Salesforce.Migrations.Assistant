@@ -11,7 +11,7 @@ namespace Salesforce.Migrations.Assistant.Library
     public interface ISalesforceDomainServices
     {
         bool IsLoggedIn { get; }
-        bool Login(string username, string password, string environmentUrl = null, string securityToken = null, SalesforceEnvironmentType environment = SalesforceEnvironmentType.CustomDomain);
+        bool Login(string username, string password, string securityToken = null, SalesforceEnvironmentType environment = SalesforceEnvironmentType.CustomDomain, string environmentUrl = null);
         string RunDeployment(byte[] zipFile, DeployOptions deployOptions);
 
         double ApiVersion { get; }
@@ -27,6 +27,7 @@ namespace Salesforce.Migrations.Assistant.Library
         List<SalesforceFileProxy> DownloadFiles(Dictionary<MetadataType, IEnumerable<string>> filesToDownload);
         List<SalesforceFileProxy> DownloadFiles(MetadataType type, string[] filesToDownload);
         List<SalesforceFileProxy> DownloadAllFilesSynchronously(PackageEntity package, CancellationToken cancellationToken);
+
         RetrieveRequest[] ConvertPackageToRequests(PackageEntity package);
         RetrieveResult CheckRetrieveResult(string id);
         Dictionary<string, DateTime> GetLastModifiedOnServerForMetadataSet(List<MetadataType> metadataTypes, IEnumerable<string> workflowNames);

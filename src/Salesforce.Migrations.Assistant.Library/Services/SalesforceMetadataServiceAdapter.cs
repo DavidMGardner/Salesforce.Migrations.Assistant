@@ -31,8 +31,8 @@ namespace Salesforce.Migrations.Assistant.Library.Services
         }
 
         public SessionHeader SessionHeader {
-            get { return this._service.SessionHeaderValue; }
-            set { this._service.SessionHeaderValue = value; }
+            get { return _service.SessionHeaderValue; }
+            set { _service.SessionHeaderValue = value; }
         }
 
 
@@ -40,20 +40,20 @@ namespace Salesforce.Migrations.Assistant.Library.Services
         {
             if (retrieveRequest.unpackaged != null)
                 string.Format("apiAccessLevel={0}, apiAccessLevelSpecified={1}, fullName={2}, namespacePrefix={3}, uninstallClass={4}, version={5}, types={6}", 
-                    (object)retrieveRequest.unpackaged.apiAccessLevel, 
-                    (bool)(retrieveRequest.unpackaged.apiAccessLevelSpecified), 
+                    retrieveRequest.unpackaged.apiAccessLevel as object, 
+                    retrieveRequest.unpackaged.apiAccessLevelSpecified, 
                     retrieveRequest.unpackaged.fullName, 
-                    (object)retrieveRequest.unpackaged.namespacePrefix, 
-                    (object)retrieveRequest.unpackaged.uninstallClass, 
-                    (object)retrieveRequest.unpackaged.version, 
-                    (object)string.Join("|", ((IEnumerable<PackageTypeMembers>)retrieveRequest.unpackaged.types).Select<PackageTypeMembers, string>((Func<PackageTypeMembers, string>)(type => type.name + ":" + string.Join(",", type.members)))));
+                    retrieveRequest.unpackaged.namespacePrefix as object, 
+                    retrieveRequest.unpackaged.uninstallClass as object, 
+                    retrieveRequest.unpackaged.version as object, 
+                    string.Join("|", retrieveRequest.unpackaged.types.Select(type => type.name + ":" + string.Join(",", type.members))) as object);
 
-            return this._service.retrieve(retrieveRequest);
+            return _service.retrieve(retrieveRequest);
         }
 
         public RetrieveResult CheckRetrieveStatus(string asyncProcessId, bool includeZip)
         {
-            RetrieveResult retrieveResult = (RetrieveResult)null;
+            RetrieveResult retrieveResult = null;
 
             retrieveResult = _service.checkRetrieveStatus(asyncProcessId, includeZip);
 
@@ -84,7 +84,7 @@ namespace Salesforce.Migrations.Assistant.Library.Services
             if (queries == null || queries.Length == 0)
                 throw new ArgumentNullException(nameof(queries));
 
-            FileProperties[] filePropertiesArray = this._service.listMetadata(queries, asOfVersion);
+            FileProperties[] filePropertiesArray = _service.listMetadata(queries, asOfVersion);
 
             if (filePropertiesArray == null || filePropertiesArray.Length == 0)
                 filePropertiesArray = new FileProperties[0];

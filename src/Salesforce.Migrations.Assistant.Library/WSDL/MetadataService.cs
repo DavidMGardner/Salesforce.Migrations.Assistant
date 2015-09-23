@@ -10851,7 +10851,7 @@ namespace Salesforce.Migrations.Assistant.Library.MetaDataService
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("quickActionLayoutItems", typeof (QuickActionLayoutItem),
+        [System.Xml.Serialization.XmlArrayItemAttribute("quickActionLayoutItems", typeof (QuickActionLayoutItem[]),
             IsNullable = false)]
         public QuickActionLayoutItem[][] quickActionLayoutColumns
         {

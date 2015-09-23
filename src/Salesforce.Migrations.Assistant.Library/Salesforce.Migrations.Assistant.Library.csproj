@@ -41,6 +41,7 @@
       <HintPath>..\packages\LibGit2Sharp.0.21.0.176\lib\net40\LibGit2Sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Moo, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Moo.0.9.1\lib\net40\Moo.dll</HintPath>
       <Private>True</Private>
@@ -74,6 +75,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncHelpers\AsyncExtensions.cs" />
+    <Compile Include="AsyncHelpers\DownloadFilesResultNullException.cs" />
+    <Compile Include="AsyncHelpers\IPollingResult.cs" />
+    <Compile Include="AsyncHelpers\StringPathExtensions.cs" />
     <Compile Include="Crypto\CryptographyProvider.cs" />
     <Compile Include="DomainAttributes\AllowsWildcardAttribute.cs" />
     <Compile Include="DomainAttributes\DisplayNameAttribute.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="DomainAttributes\SalesforceDirectory.cs" />
     <Compile Include="DomainAttributes\SupportedAttribute.cs" />
     <Compile Include="Domain\ApexMemberProxy.cs" />
+    <Compile Include="Domain\BundlingEntity.cs" />
     <Compile Include="Domain\DeploymentTestResultType.cs" />
     <Compile Include="Domain\DeployResult.cs" />
     <Compile Include="Domain\DeployTestResult.cs" />
@@ -94,7 +100,10 @@
     <Compile Include="Domain\ISalesforceMetadataContainer.cs" />
     <Compile Include="Domain\IStaticResource.cs" />
     <Compile Include="Domain\LogDescriptor.cs" />
+    <Compile Include="Domain\MetadataSubTypeParentTypeIsNotPresentException.cs" />
     <Compile Include="Domain\MetadataTypeEnums.cs" />
+    <Compile Include="Domain\MetadataTypeExtensions.cs" />
+    <Compile Include="Domain\MetadataTypeIsNotFoundByExtension.cs" />
     <Compile Include="Domain\OperationResult.cs" />
     <Compile Include="Domain\DeployOptions.cs" />
     <Compile Include="Domain\PackageEntity.cs" />
@@ -107,12 +116,14 @@
     <Compile Include="Domain\TestResult.cs" />
     <Compile Include="GeneratePackageFile.cs" />
     <Compile Include="ISalesforceDomainServices.cs" />
+    <Compile Include="IUnzipPackageFilesHelper.cs" />
     <Compile Include="Services\ISalesforcePartnerServiceAdapter.cs" />
     <Compile Include="Services\ISalesforceToolingServiceAdapter.cs" />
     <Compile Include="Services\SalesforceMetadataServiceAdapter.cs" />
     <Compile Include="Services\ISaleforceMetadataServiceAdapter.cs" />
     <Compile Include="Services\SalesforcePartnerServiceAdapter.cs" />
     <Compile Include="Services\SalesforceToolingServiceAdapter.cs" />
+    <Compile Include="UnzipPackageFilesHelper.cs" />
     <Compile Include="WSDL\EnterpriseSforceService.cs" />
     <Compile Include="WSDL\MetadataService.cs" />
     <Compile Include="SalesforceDomainServices.cs" />

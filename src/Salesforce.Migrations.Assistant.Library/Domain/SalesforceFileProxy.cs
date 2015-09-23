@@ -10,6 +10,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
     public class SalesforceFileProxy
     {
         private string _fileName;
+
         public string Id { get; set; }
         public string FileName
         {
@@ -37,6 +38,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         public byte[] BinaryBody { get; set; }
         public string ResourceFileName { get; set; }
         public string PathInResource { get; set; }
+
 
         public override string ToString()
         {
