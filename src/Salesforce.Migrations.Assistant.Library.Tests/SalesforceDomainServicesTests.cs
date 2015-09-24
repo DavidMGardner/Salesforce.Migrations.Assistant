@@ -60,7 +60,7 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
 
             svc.LoginSandbox(username, password, token);
 
-            var file = svc.QueryApexFileByName("*", "ApexClass");
+            var file = svc.QueryApexFileByName("CP_COM_ContractdetailsSvcController", "ApexClass");
         }
 
 
@@ -74,17 +74,19 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
 
             svc.LoginSandbox(username, password, token);
 
-            var file = svc.QueryItemsByName<ApexClass>("CP%", "ApexClass", "LIKE");
-
-            Console.WriteLine(file.Count());
-        }
+            var file = svc.QueryItemsByName(new SalesforceQuery()
+                                                .Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body")
+                                                .From("ApexClass")
+                                                .Where("LastModifiedDate")
+                                                .GreaterThanDateTime(DateTimeOffset.Parse("09/21/2015").ToString("o")));
+         }
 
         [TestMethod]
         public void QueryBuilder()
         {
             //string.Format("select Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body from {0} where Name {1} '{2}'", type, @operator, name))
 
-            string qs = new SalesforceQuerySession()
+            string qs = new SalesforceQuery()
                 .Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body")
                 .From("ApexClass")
                 .Where("Name")
@@ -94,6 +96,11 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
             Console.WriteLine(qs);
         }
 
-        
+        [TestMethod]
+        public void DatetimeFormats()
+        {
+            string dt = DateTimeOffset.Parse("09/21/2015").ToString("o");
+            Console.WriteLine(dt);
+        }
     }
 }

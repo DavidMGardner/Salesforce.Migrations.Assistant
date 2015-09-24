@@ -117,6 +117,8 @@
     <Compile Include="GeneratePackageFile.cs" />
     <Compile Include="ISalesforceDomainServices.cs" />
     <Compile Include="IUnzipPackageFilesHelper.cs" />
+    <Compile Include="Domain\SalesforceQuery.cs" />
+    <Compile Include="Domain\PackageEntityExtensions.cs" />
     <Compile Include="Services\ISalesforcePartnerServiceAdapter.cs" />
     <Compile Include="Services\ISalesforceToolingServiceAdapter.cs" />
     <Compile Include="Services\SalesforceMetadataServiceAdapter.cs" />

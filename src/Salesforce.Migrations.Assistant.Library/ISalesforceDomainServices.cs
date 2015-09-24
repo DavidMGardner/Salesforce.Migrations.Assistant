@@ -20,6 +20,7 @@ namespace Salesforce.Migrations.Assistant.Library
         
         OperationResult CreateNewSalesForceFile(SalesforceFileProxy entity);
         SalesforceFileProxy QueryApexFileByName(string fileName, string type);
+
         OperationResult DeleteFileFromSalesForce(string fileId);
         HashSet<SalesforceItem> QueryToolingItemNamesByType(MetadataType type);
         OperationResult BuildFiles(IEnumerable<ICompilableItem> changedFiles);

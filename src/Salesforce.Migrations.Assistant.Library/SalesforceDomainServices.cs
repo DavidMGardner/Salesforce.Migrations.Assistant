@@ -154,24 +154,6 @@ namespace Salesforce.Migrations.Assistant.Library
             _partnerServiceAdapter.SetupClientId(ClientName);
         }
 
-
-        /*
-        / Code that creates an instance of the MetadataService with a valid session.
-        MetadataService metadataService = ...;
-
-        // Get the bytes for the testing zip file from the file system
-        byte[] zipFile = System.IO.File.ReadAllBytes(@"C:\path to sample\package\deleteClass.zip");
-        DeployOptions deployOptions = new DeployOptions() { rollbackOnError = true, singlePackage = true };
-        AsyncResult ar = metadataService.deploy(zipFile, deployOptions);
-
-        // More code that calls checkStatus using the AsyncResult.Id until done
-
-        // If the AsyncResult.state isn't Error get the DeployResult with checkDeployStatus()
-
-    */
-
-
-
         public string RunDeployment(byte[] zipFile, DeployOptions deployOptions)
         {
             var id = _metadataServiceAdapter.Deploy(zipFile, deployOptions).id;
@@ -283,47 +265,45 @@ namespace Salesforce.Migrations.Assistant.Library
 
         public SalesforceFileProxy QueryApexFileByName(string fileName, string type)
         {
-           return QueryApexFileByName(fileName, type, "=");
+            var sfq = new SalesforceQuery()
+                .Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body")
+                .From(type)
+                .Where("name")
+                .Equals(fileName);
+
+           return QueryItemsByName(sfq).First();
         }
 
+        //private SalesforceFileProxy QueryByName(SalesforceQuery query)
+        //{
+        //    QueryResult queryResult = SessionExpirationWrapper(() => _toolingServiceAdapter.Query(query.ToString()));
+        //    if (queryResult.size <= 0)
+        //        return null;
 
-        public SalesforceFileProxy QueryApexFileByName(string fileName, string type, string @operator)
+        //    SalesforceFileProxy salesFileEntity = new SalesforceFileProxy();
+
+        //    dynamic sforceObject = queryResult.records[0];
+
+        //    salesFileEntity.CreatedByName = sforceObject.CreatedById;
+        //    if (sforceObject.CreatedDate != null)
+        //        salesFileEntity.CreatedDateUtcTicks = sforceObject.CreatedDate.ToFileTimeUtc().ToString();
+
+        //    salesFileEntity.Id = sforceObject.Id;
+        //    salesFileEntity.NamespacePrefix = sforceObject.NamespacePrefix;
+        //    salesFileEntity.Type = query.Type();
+
+        //    if (sforceObject.LastModifiedDate != null)
+        //        salesFileEntity.LastModifiedDateUtcTicks = sforceObject.LastModifiedDate.ToFileTimeUtc().ToString();
+
+        //    salesFileEntity.FileBody = sforceObject.Body;
+        //    salesFileEntity.FileName = sforceObject.Name;
+        //    return salesFileEntity;
+        //}
+        
+        public IEnumerable<SalesforceFileProxy> QueryItemsByName(SalesforceQuery query)
         {
-            switch (type)
-            {
-                case "ApexClass":
-                    return null; //QueryByName<ApexClass>("ApexClass", fileName, @operator);
-                //case "ApexTrigger":
-                //    return this.QueryApexTriggerByName(fileName);
-                //case "ApexPage":
-                //    return this.QueryApexPageByName(fileName);
-                case "ApexComponent":
-                    return this.QueryApexComponentByName(fileName);
-                //case "StaticResource":
-                //    return this.QueryStaticResourceByName(fileName);
-                //default:
-                //    return (ProjectFileEntity)null;
-            }
-            return null;
-        }
-
-
-        private static byte[] ToByteArray(string str)
-        {
-            byte[] numArray = new byte[str.Length * 2];
-            Buffer.BlockCopy((Array)str.ToCharArray(), 0, (Array)numArray, 0, numArray.Length);
-            return numArray;
-        }
-
-        public SalesforceFileProxy QueryApexFilesByName(string fileName, string type, string @operator)
-        {
-            return QueryApexFileByName(fileName, type, "=");
-        }
-
-        public SalesforceFileProxy[] QueryItemsByName<T>(string name, string type, string @operator) where T : class
-        {
-            QueryResult queryResult = this.SessionExpirationWrapper(() =>
-               _toolingServiceAdapter.Query(string.Format("select Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body from {0} where Name {1} '{2}'", type, @operator, name)));
+            string queryText = query.ToString();
+            QueryResult queryResult = SessionExpirationWrapper(() => _toolingServiceAdapter.Query(queryText));
             if (queryResult.size <= 0)
                 return null;
 
@@ -338,7 +318,7 @@ namespace Salesforce.Migrations.Assistant.Library
 
                 salesFileEntity.Id = sforceObject.Id;
                 salesFileEntity.NamespacePrefix = sforceObject.NamespacePrefix;
-                salesFileEntity.Type = type;
+                salesFileEntity.Type = query.Type();
 
                 if (sforceObject.LastModifiedDate != null)
                     salesFileEntity.LastModifiedDateUtcTicks =
@@ -349,14 +329,20 @@ namespace Salesforce.Migrations.Assistant.Library
                 return salesFileEntity;
             });
 
-            return sforceObjects.ToArray();
+            return sforceObjects.ToList();
         }
 
+        private static byte[] ToByteArray(string str)
+        {
+            byte[] numArray = new byte[str.Length * 2];
+            Buffer.BlockCopy((Array)str.ToCharArray(), 0, (Array)numArray, 0, numArray.Length);
+            return numArray;
+        }
 
-        private SalesforceFileProxy QueryByName<T>(SalesforceQuerySession query) where T : class
+        private SalesforceFileProxy QueryByName<T>(string type, string name, string @operator) where T : class
         {
             QueryResult queryResult = this.SessionExpirationWrapper(() =>
-               _toolingServiceAdapter.Query(query.ToString()));
+               _toolingServiceAdapter.Query(string.Format("select Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body from {0} where Name {1} '{2}'", type, @operator, name)));
             if (queryResult.size <= 0)
                 return null;
 
@@ -370,7 +356,7 @@ namespace Salesforce.Migrations.Assistant.Library
 
             salesFileEntity.Id = sforceObject.Id;
             salesFileEntity.NamespacePrefix = sforceObject.NamespacePrefix;
-            salesFileEntity.Type = query.Type();
+            salesFileEntity.Type = type;
 
             if (sforceObject.LastModifiedDate != null)
                 salesFileEntity.LastModifiedDateUtcTicks = sforceObject.LastModifiedDate.Value.ToFileTimeUtc().ToString();
@@ -708,102 +694,6 @@ namespace Salesforce.Migrations.Assistant.Library
                         Body = s.FileBody
                     }.MapTo<T>())).ToArray();
         }
-    }
-}
-
-
-public class SalesforceQuerySession
-{
-    private string _query;
-    private List<string> _fieldList = new List<string>();
-    
-    private string _operator;
-    private string _filter;
-    private string _predicate;
-    private string _source;
-    private string _type;
-
-    public string Type()
-    {
-        return _type;
-    }
-
-    public SalesforceQuerySession Select(string name)
-    {
-        _fieldList.Add(name);
-
-        return this;
-    }
-
-    public SalesforceQuerySession Select(string[] names)
-    {
-        _fieldList.AddRange(names);
-
-        return this;
-    }
-
-    public SalesforceQuerySession From(string type)
-    {
-        _type = type;
-        _source = String.Format("from {0}", type);
-
-        return this;
-    }
-
-    public SalesforceQuerySession Like(string name)
-    {
-        _operator = String.Format("like '{0}'", name);
-
-        return this;
-    }
-
-    public SalesforceQuerySession Equals(string name)
-    {
-        _filter = String.Format("= '{0}' ", name);
-
-        return this;
-    }
-
-    public SalesforceQuerySession Where(string name)
-    {
-        _predicate = String.Format("where {0} ", name);
-
-        return this;
-    }
-
-    public override string ToString()
-    {
-        StringBuilder sb = new StringBuilder("Select ")
-            .Append(string.Join(",", _fieldList))
-            .Append(" ")
-            .Append(_source)
-            .Append(" ")
-            .Append(_predicate)
-            .Append(_operator)
-            .Append(_filter);
-
-        return sb.ToString();
-    }
-}
-
-static public class PackageEntityExtensions
-{
-    static public PackageEntity BuildQueryAllCommonTypes(this PackageEntity entity)
-    {
-        var pe = new PackageEntity()
-            .SetVersion("29.0")
-            .AddGlobal("ApexClass")
-            .AddGlobal("ApexPage")
-            .AddGlobal("ApexComponent")
-            .AddGlobal("ApexTrigger")
-            .AddGlobal("ApprovalProcess")
-            .AddGlobal("CustomLabels")
-            .AddGlobal("StaticResource")
-            .AddGlobal("Layouts")
-            .AddGlobal("CustomObject")
-            .AddGlobal("Workflow");
-
-        return pe;
     }
 }
 
