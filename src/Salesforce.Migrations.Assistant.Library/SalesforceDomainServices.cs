@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -13,6 +14,7 @@ using Salesforce.Migrations.Assistant.Library.MetaDataService;
 using Salesforce.Migrations.Assistant.Library.Services;
 using Salesforce.Migrations.Assistant.Library.Tooling.SforceService;
 using Serilog;
+using static Salesforce.Migrations.Assistant.Library.Domain.SalesforceQueryExtensions;
 using DeployOptions = Salesforce.Migrations.Assistant.Library.Domain.DeployOptions;
 using DeployResult = Salesforce.Migrations.Assistant.Library.MetaDataService.DeployResult;
 using LoginResult = Salesforce.Migrations.Assistant.Library.Partner.SforceService.LoginResult;
@@ -315,18 +317,39 @@ namespace Salesforce.Migrations.Assistant.Library
             return operationResult;
         }
 
-        public SalesforceFileProxy QueryApexFileByName(string fileName, string type)
+        private static SalesforceFileProxy FileFactory(dynamic sforceObject, string type)
         {
-            var sfq = new SalesforceQuery()
-                .Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body")
-                .From(type)
-                .Where("name")
-                .Equals(fileName);
+            SalesforceFileProxy salesFileEntity = new SalesforceFileProxy
+            {
+                CreatedByName = sforceObject.CreatedById,
+                Id = sforceObject.Id,
+                NamespacePrefix = sforceObject.NamespacePrefix,
+                Type = type
+            };
 
-           return QueryItemsByName(sfq).First();
+
+            if (sforceObject.CreatedDate != null)
+                salesFileEntity.CreatedDateUtcTicks = sforceObject.CreatedDate.ToFileTimeUtc().ToString();
+            
+            if (sforceObject.LastModifiedDate != null)
+                salesFileEntity.LastModifiedDateUtcTicks = sforceObject.LastModifiedDate.ToFileTimeUtc().ToString();
+
+            try
+            {
+                if (DynamicExtensions.IsPropertyExist(sforceObject, "Body"))
+                    salesFileEntity.FileBody = sforceObject.Body;
+
+                if (DynamicExtensions.IsPropertyExist(sforceObject, "Name"))
+                    salesFileEntity.FileName = sforceObject.Name;
+            }
+            catch
+            {
+                // ignored
+            }
+            return salesFileEntity;
         }
 
-        public IEnumerable<SalesforceFileProxy> QueryItemsByName(SalesforceQuery query)
+        private IEnumerable<SalesforceFileProxy> QueryItems(SalesforceQuery query)
         {
             string queryText = query.ToString();
             QueryResult queryResult = SessionExpirationWrapper(() => _toolingServiceAdapter.Query(queryText));
@@ -335,25 +358,7 @@ namespace Salesforce.Migrations.Assistant.Library
 
             SalesforceFileProxy salesFileEntity = new SalesforceFileProxy();
 
-            var sforceObjects = queryResult.records.Select(delegate(sObject s)
-            {
-                dynamic sforceObject = s;
-                salesFileEntity.CreatedByName = sforceObject.CreatedById;
-                if (sforceObject.CreatedDate != null)
-                    salesFileEntity.CreatedDateUtcTicks = sforceObject.CreatedDate.ToFileTimeUtc().ToString();
-
-                salesFileEntity.Id = sforceObject.Id;
-                salesFileEntity.NamespacePrefix = sforceObject.NamespacePrefix;
-                salesFileEntity.Type = query.Type();
-
-                if (sforceObject.LastModifiedDate != null)
-                    salesFileEntity.LastModifiedDateUtcTicks =
-                        sforceObject.LastModifiedDate.ToFileTimeUtc().ToString();
-
-                salesFileEntity.FileBody = sforceObject.Body;
-                salesFileEntity.FileName = sforceObject.Name;
-                return salesFileEntity;
-            });
+            IEnumerable<SalesforceFileProxy> sforceObjects = queryResult.records.Select(s => FileFactory(s, query.Type()));
 
             return sforceObjects.ToList();
         }
@@ -568,16 +573,54 @@ namespace Salesforce.Migrations.Assistant.Library
             return retrieveResult;
         }
 
+        public IEnumerable<SalesforceFileProxy> GetFilesChangedSince(DateTimeOffset dto)
+        {
+            List<SalesforceFileProxy> result = new List<SalesforceFileProxy>();
+
+            QueryItems(QueryApexClassesByOffest(dto)).NullSafeAddRange(result);
+            QueryItems(QueryApexComponentsByOffest(dto)).NullSafeAddRange(result);
+            QueryItems(QueryApexTriggersByOffest(dto)).NullSafeAddRange(result);
+            QueryItems(QueryApexPagesByOffest(dto)).NullSafeAddRange(result);
+            QueryItems(QueryStaticResourcesByOffest(dto)).NullSafeAddRange(result);
+
+            return result;
+        }
+
+
         public Dictionary<string, DateTime> GetLastModifiedOnServerForMetadataSet(List<MetadataType> metadataTypes,
             IEnumerable<string> workflowNames)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, DateTime> GetLastModifiedOnServer(
-            Dictionary<MetadataType, IEnumerable<string>> filesToCheck)
+        public Dictionary<string, DateTime> GetLastModifiedOnServer(Dictionary<MetadataType, IEnumerable<string>> filesToCheck)
         {
-            throw new NotImplementedException();
+            var query = new SalesforceQuery().Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body").From("{0}")
+                                                    .Where("LastModifiedDate")
+                                                    .GreaterThanDateTime(DateTimeOffset.Parse("09/21/2015").ToString("o"));
+
+            //Dictionary<string, DateTime> result = new Dictionary<string, DateTime>();
+            //foreach (MetadataType index in filesToCheck.Keys)
+            //{
+            //    if (!Enumerable.Any<string>(filesToCheck[index]))
+            //    {
+            //        MetadataType type = index;
+            //        sObject[] sObjectArray = this.SessionExpirationWrapper((Func<sObject[]>)(() => _toolingServiceAdapter.Retrieve("Id, LastModifiedDate", type.ToString(), Enumerable.ToArray<string>(filesToCheck[type]))));
+            //        if (index == MetadataType.ApexClass)
+            //            LinqExtensions.ForEach<WelkinSuite.Salesforce.Gateway.Tooling.ApexClass>(Enumerable.OfType<WelkinSuite.Salesforce.Gateway.Tooling.ApexClass>((IEnumerable)sObjectArray), (Action<WelkinSuite.Salesforce.Gateway.Tooling.ApexClass>)(element => result[element.Id] = element.LastModifiedDate.Value));
+            //        if (index == MetadataType.ApexComponent)
+            //            LinqExtensions.ForEach<WelkinSuite.Salesforce.Gateway.Tooling.ApexComponent>(Enumerable.OfType<WelkinSuite.Salesforce.Gateway.Tooling.ApexComponent>((IEnumerable)sObjectArray), (Action<WelkinSuite.Salesforce.Gateway.Tooling.ApexComponent>)(element => result[element.Id] = element.LastModifiedDate.Value));
+            //        if (index == MetadataType.ApexTrigger)
+            //            LinqExtensions.ForEach<WelkinSuite.Salesforce.Gateway.Tooling.ApexTrigger>(Enumerable.OfType<WelkinSuite.Salesforce.Gateway.Tooling.ApexTrigger>((IEnumerable)sObjectArray), (Action<WelkinSuite.Salesforce.Gateway.Tooling.ApexTrigger>)(element => result[element.Id] = element.LastModifiedDate.Value));
+            //        if (index == MetadataType.ApexPage)
+            //            LinqExtensions.ForEach<WelkinSuite.Salesforce.Gateway.Tooling.ApexPage>(Enumerable.OfType<WelkinSuite.Salesforce.Gateway.Tooling.ApexPage>((IEnumerable)sObjectArray), (Action<WelkinSuite.Salesforce.Gateway.Tooling.ApexPage>)(element => result[element.Id] = element.LastModifiedDate.Value));
+            //        if (index == MetadataType.StaticResource)
+            //            LinqExtensions.ForEach<WelkinSuite.Salesforce.Gateway.Tooling.StaticResource>(Enumerable.OfType<WelkinSuite.Salesforce.Gateway.Tooling.StaticResource>((IEnumerable)sObjectArray), (Action<WelkinSuite.Salesforce.Gateway.Tooling.StaticResource>)(element => result[element.Id] = element.LastModifiedDate.Value));
+            //    }
+            //}
+            //return result;
+
+            return new Dictionary<string, DateTime>();
         }
 
         public List<string> GetTriggerableObjects()

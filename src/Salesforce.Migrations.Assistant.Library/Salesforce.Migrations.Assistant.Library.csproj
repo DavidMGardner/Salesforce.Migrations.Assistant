@@ -111,6 +111,7 @@
     <Compile Include="Domain\SalesforceFileNode.cs" />
     <Compile Include="Domain\SalesforceFileProxy.cs" />
     <Compile Include="Domain\SalesforceItem.cs" />
+    <Compile Include="Domain\SalesforceQueryExtensions.cs" />
     <Compile Include="Domain\StaticResourceContainerNode.cs" />
     <Compile Include="Domain\TestClass.cs" />
     <Compile Include="Domain\TestQueueItem.cs" />
