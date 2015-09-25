@@ -96,6 +96,7 @@
     <Compile Include="Domain\ErrorDescriptor.cs" />
     <Compile Include="Domain\ICompilableItem.cs" />
     <Compile Include="Domain\IDeployableItem.cs" />
+    <Compile Include="Domain\IncrementalSleepPolicy.cs" />
     <Compile Include="Domain\ISalesforceItem.cs" />
     <Compile Include="Domain\ISalesforceMetadataContainer.cs" />
     <Compile Include="Domain\IStaticResource.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Domain\TestClass.cs" />
     <Compile Include="Domain\TestQueueItem.cs" />
     <Compile Include="Domain\TestResult.cs" />
+    <Compile Include="Domain\TimeoutRunner.cs" />
     <Compile Include="GeneratePackageFile.cs" />
     <Compile Include="ISalesforceDomainServices.cs" />
     <Compile Include="IUnzipPackageFilesHelper.cs" />

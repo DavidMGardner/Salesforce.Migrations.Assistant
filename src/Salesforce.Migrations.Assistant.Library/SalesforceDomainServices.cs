@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Services.Protocols;
@@ -19,6 +17,8 @@ using DeployOptions = Salesforce.Migrations.Assistant.Library.Domain.DeployOptio
 using DeployResult = Salesforce.Migrations.Assistant.Library.MetaDataService.DeployResult;
 using LoginResult = Salesforce.Migrations.Assistant.Library.Partner.SforceService.LoginResult;
 using SaveResult = Salesforce.Migrations.Assistant.Library.Tooling.SforceService.SaveResult;
+using ErrorResult = Salesforce.Migrations.Assistant.Library.Tooling.SforceService.Error;
+using DeployMessage = Salesforce.Migrations.Assistant.Library.Tooling.SforceService.DeployMessage;
 
 using ApexClass = Salesforce.Migrations.Assistant.Library.Tooling.SforceService.ApexClass1;
 using ApexComponent = Salesforce.Migrations.Assistant.Library.Tooling.SforceService.ApexComponent1;
@@ -215,6 +215,51 @@ namespace Salesforce.Migrations.Assistant.Library
             }))[0].id;
         }
 
+        public ContainerAsyncRequest[] CompileApexMetadataContainer(string metadataContainerId, bool noDeploy, string classMemberId = null, IIncrementalSleepPolicy sleepPolicy = null)
+        {
+            if (sleepPolicy == null)
+                sleepPolicy = new FixedSleepPolicy();
+
+            ContainerAsyncRequest[] compileRequest = { new ContainerAsyncRequest()
+            {
+                MetadataContainerId = metadataContainerId,
+                MetadataContainerMemberId = classMemberId,
+                IsCheckOnly = noDeploy,
+                IsCheckOnlySpecified = true
+            }};
+
+            SaveResult[] createCompileResult = SessionExpirationWrapper(() => _toolingServiceAdapter.Create(new sObject[1]
+            {
+                compileRequest[0]
+            }));
+
+            ContainerAsyncRequest[] containerAsyncRequestArray = TimeoutRunner.RunUntil(() => Compile(createCompileResult), x => x[0].State != "Queued", sleepPolicy, "compiling");
+            if (containerAsyncRequestArray != null)
+                return containerAsyncRequestArray;
+
+            compileRequest[0] = new ContainerAsyncRequest()
+            {
+                MetadataContainerId = metadataContainerId,
+                MetadataContainerMemberId = classMemberId,
+                State = "Aborted"
+            };
+
+            SessionExpirationWrapper(() => _toolingServiceAdapter.Create(new sObject[1]
+            {
+                compileRequest[0]
+            }));
+
+            throw new BuildAbortedTimeoutException("Time of the request to Salesforce expired. Build aborted.");
+        }
+
+        private ContainerAsyncRequest[] Compile(SaveResult[] createCompileResult)
+        {
+            return SessionExpirationWrapper(() => _toolingServiceAdapter.Retrieve("Id, ErrorMsg, CompilerErrors, State", "ContainerAsyncRequest", new string[1]
+            {
+                createCompileResult[0].id
+            }).OfType<ContainerAsyncRequest>().ToArray());
+        }
+
         public OperationResult BuildFiles(IEnumerable<ICompilableItem> changedFiles)
         {
             OperationResult operationResult = new OperationResult();
@@ -223,44 +268,51 @@ namespace Salesforce.Migrations.Assistant.Library
             var compilableItems = changedFiles as IList<ICompilableItem> ?? changedFiles.ToList();
 
             objects.AddRange(GetApexMembers<ApexClassMember>(compilableItems, metadataContainer));
+            objects.AddRange(GetApexMembers<ApexComponentMember>(compilableItems, metadataContainer));
+            objects.AddRange(GetApexMembers<ApexTriggerMember>(compilableItems, metadataContainer));
+            objects.AddRange(GetApexMembers<ApexPageMember>(compilableItems, metadataContainer));
 
+          
+            List<SaveResult> saveList = new List<SaveResult>();
+            if (objects.Count > 0)
+            {
+                saveList.AddRange(SessionExpirationWrapper(() => _toolingServiceAdapter.Create(objects.ToArray())));
+            }
+
+            if (saveList.Any(o => o.errors != null))
+            {
+                foreach (var saveResult in saveList)
+                {
+                    if (saveResult.errors != null)
+                    {
+                        List<ErrorDescriptor> errorList = saveResult.errors.Select(e => new ErrorDescriptor()
+                            {
+                                Id = e.statusCode.ToString(),
+                                Name = e.message,
+                                Problem = e.fields == null ? string.Empty : string.Join(";", e.fields)
+                            }).ToList();
+                        operationResult.Errors.AddRange(errorList);
+                    }
+                    
+                }
+            }
+
+            ContainerAsyncRequest[] containerAsyncRequestArray = CompileApexMetadataContainer(metadataContainer, false, null);
+
+            if (containerAsyncRequestArray.Any(o => o.DeployDetails.componentFailures.Any()))
+            {
+                operationResult.Errors.AddRange(containerAsyncRequestArray.SelectMany(sm => sm.DeployDetails.componentFailures)
+                                                            .Select(s => new ErrorDescriptor
+                                                            {
+                                                                Name = s.fullName,
+                                                                Id = s.id,
+                                                                Line = s.lineNumber.ToString(),
+                                                                Problem = s.problem,
+                                                                ProblemType = s.problemType
+                                                            }));
+            }
+                
             return operationResult;
-
-            //objects.AddRange((IEnumerable<sObject>) GetApexComponentMembers(compilableItems, metadataContainer));
-            //objects.AddRange((IEnumerable<sObject>) GetApexPageMembers(compilableItems, metadataContainer));
-            //objects.AddRange((IEnumerable<sObject>) GetApexTriggerMembers(compilableItems, metadataContainer));
-            //List<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult> list1 =
-            //    new List<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult>();
-            //if (objects.Count > 0)
-            //    list1.AddRange(
-            //        (IEnumerable<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult>)
-            //            this.SessionExpirationWrapper<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult[]>(
-            //                (Func<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult[]>)
-            //                    (() => this._toolingGateway.Create(objects.ToArray()))));
-            //if (
-            //    Enumerable.Any<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult>(
-            //        (IEnumerable<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult>) list1,
-            //        (Func<WelkinSuite.Salesforce.Gateway.Tooling.SaveResult, bool>) (o => o.errors != null)))
-            //{
-            //    foreach (WelkinSuite.Salesforce.Gateway.Tooling.SaveResult saveResult in list1)
-            //    {
-            //        if (saveResult.errors != null)
-            //        {
-            //            List<ErrorDescriptor> list2 =
-            //                Enumerable.ToList<ErrorDescriptor>(
-            //                    Enumerable.Select<WelkinSuite.Salesforce.Gateway.Tooling.Error, ErrorDescriptor>(
-            //                        (IEnumerable<WelkinSuite.Salesforce.Gateway.Tooling.Error>) saveResult.errors,
-            //                        (Func<WelkinSuite.Salesforce.Gateway.Tooling.Error, ErrorDescriptor>)
-            //                            (e => new ErrorDescriptor()
-            //                            {
-            //                                Id = e.statusCode.ToString(),
-            //                                Name = e.message,
-            //                                Problem = e.fields == null ? string.Empty : string.Join(";", e.fields)
-            //                            })));
-            //            operationResult.Errors.AddRange((IEnumerable<ErrorDescriptor>) list2);
-            //        }
-            //  }
-            // }
         }
 
         public SalesforceFileProxy QueryApexFileByName(string fileName, string type)
@@ -274,32 +326,6 @@ namespace Salesforce.Migrations.Assistant.Library
            return QueryItemsByName(sfq).First();
         }
 
-        //private SalesforceFileProxy QueryByName(SalesforceQuery query)
-        //{
-        //    QueryResult queryResult = SessionExpirationWrapper(() => _toolingServiceAdapter.Query(query.ToString()));
-        //    if (queryResult.size <= 0)
-        //        return null;
-
-        //    SalesforceFileProxy salesFileEntity = new SalesforceFileProxy();
-
-        //    dynamic sforceObject = queryResult.records[0];
-
-        //    salesFileEntity.CreatedByName = sforceObject.CreatedById;
-        //    if (sforceObject.CreatedDate != null)
-        //        salesFileEntity.CreatedDateUtcTicks = sforceObject.CreatedDate.ToFileTimeUtc().ToString();
-
-        //    salesFileEntity.Id = sforceObject.Id;
-        //    salesFileEntity.NamespacePrefix = sforceObject.NamespacePrefix;
-        //    salesFileEntity.Type = query.Type();
-
-        //    if (sforceObject.LastModifiedDate != null)
-        //        salesFileEntity.LastModifiedDateUtcTicks = sforceObject.LastModifiedDate.ToFileTimeUtc().ToString();
-
-        //    salesFileEntity.FileBody = sforceObject.Body;
-        //    salesFileEntity.FileName = sforceObject.Name;
-        //    return salesFileEntity;
-        //}
-        
         public IEnumerable<SalesforceFileProxy> QueryItemsByName(SalesforceQuery query)
         {
             string queryText = query.ToString();
@@ -377,46 +403,28 @@ namespace Salesforce.Migrations.Assistant.Library
             SalesforceFileProxy salesFileEntity = new SalesforceFileProxy();
             ApexClass apexClass = queryResult.records[0] as ApexClass;
 
-           salesFileEntity.CreatedByName = apexClass.CreatedById;
-           if (apexClass.CreatedDate != null)
-                salesFileEntity.CreatedDateUtcTicks = apexClass.CreatedDate.Value.ToFileTimeUtc().ToString();
+            if (apexClass != null)
+            {
+                salesFileEntity.CreatedByName = apexClass.CreatedById;
+                if (apexClass.CreatedDate != null)
+                    salesFileEntity.CreatedDateUtcTicks = apexClass.CreatedDate.Value.ToFileTimeUtc().ToString();
 
-            salesFileEntity.Id = apexClass.Id;
-           salesFileEntity.NamespacePrefix = apexClass.NamespacePrefix;
-           salesFileEntity.Type = "ApexClass";
+                salesFileEntity.Id = apexClass.Id;
+                salesFileEntity.NamespacePrefix = apexClass.NamespacePrefix;
+                salesFileEntity.Type = "ApexClass";
 
-           if (apexClass.LastModifiedDate != null)
-                salesFileEntity.LastModifiedDateUtcTicks = apexClass.LastModifiedDate.Value.ToFileTimeUtc().ToString();
+                if (apexClass.LastModifiedDate != null)
+                    salesFileEntity.LastModifiedDateUtcTicks = apexClass.LastModifiedDate.Value.ToFileTimeUtc().ToString();
 
-            salesFileEntity.FileBody = apexClass.Body;
-           salesFileEntity.FileName = apexClass.Name;
-           return salesFileEntity;
+                salesFileEntity.FileBody = apexClass.Body;
+                salesFileEntity.FileName = apexClass.Name;
+
+                return salesFileEntity;
+            }
+            return null;
         }
 
-        private SalesforceFileProxy QueryApexComponentByName(string name)
-        {
-            QueryResult queryResult = this.SessionExpirationWrapper(() => 
-                _toolingServiceAdapter.Query(
-                    $"select Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Markup from ApexComponent where Name='{(object)name}'"));
-
-            if (queryResult.size <= 0)
-                return null;
-            SalesforceFileProxy salesFileEntity = new SalesforceFileProxy();
-            ApexComponent apexComponent = queryResult.records[0] as ApexComponent;
-
-
-            salesFileEntity.CreatedByName = apexComponent.CreatedById;
-            salesFileEntity.CreatedDateUtcTicks = apexComponent.CreatedDate.Value.ToFileTimeUtc().ToString();
-            salesFileEntity.Id = apexComponent.Id;
-            salesFileEntity.NamespacePrefix = apexComponent.NamespacePrefix;
-            salesFileEntity.Type = "ApexComponent";
-            salesFileEntity.LastModifiedDateUtcTicks = apexComponent.LastModifiedDate.Value.ToFileTimeUtc().ToString();
-            salesFileEntity.FileBody = apexComponent.Markup;
-            salesFileEntity.FileName = apexComponent.Name;
-            return salesFileEntity;
-        }
-        
-
+       
         public List<SalesforceFileProxy> DownloadAllFilesSynchronously(CancellationToken cancellationToken)
         {
             PackageEntity pe = new PackageEntity().BuildQueryAllCommonTypes();
