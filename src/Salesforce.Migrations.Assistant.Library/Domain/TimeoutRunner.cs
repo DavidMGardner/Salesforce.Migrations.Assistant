@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Salesforce.Migrations.Assistant.Library.Exceptions;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
@@ -47,19 +48,5 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                 throw new TimeoutException("The operation has timed out.");
             }
         }
-
-  
-    }
-
-    
-
-    public class BuildAbortedTimeoutException : Exception
-    {
-        public BuildAbortedTimeoutException(string message) : base(message) { }
-    }
-
-    public class TaskTimeoutException : Exception
-    {
-        public TaskTimeoutException(string message) : base(message) { }
     }
 }

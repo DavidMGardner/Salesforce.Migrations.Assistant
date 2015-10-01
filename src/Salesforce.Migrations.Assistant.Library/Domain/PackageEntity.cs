@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
+    public class PackageTypeEntity
+    {
+        public string Name { get; set; }
+        public string[] Members { get; set; }
+    }
+
     public class PackageEntity
     {
         private readonly List<PackageTypeEntity> _listTypes = new List<PackageTypeEntity>();
 
         public string Version { get; set; }
 
-        public PackageEntity.PackageTypeEntity[] Types
+        public PackageTypeEntity[] Types
         {
             get { return _listTypes.ToArray(); }
             set { _listTypes.AddRange(value);  }
@@ -33,12 +39,6 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             });
 
             return this;
-        }
-
-        public class PackageTypeEntity
-        {
-            public string Name { get; set; }
-            public string[] Members { get; set; }
         }
     }
 }

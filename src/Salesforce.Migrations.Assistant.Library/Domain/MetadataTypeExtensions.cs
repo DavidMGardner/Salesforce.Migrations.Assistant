@@ -73,34 +73,12 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         public static MetadataType[] GetSubTypesForMetadata(this MetadataType parent)
         {
             IEnumerable<MetadataType> enumerable = Enum.GetValues(typeof(MetadataType)).OfType<MetadataType>();
-            List<MetadataType> list = new List<MetadataType>();
-            foreach (MetadataType metadataType in enumerable)
-            {
-                if (HasMetadataAttribute<MetadataSubTypeAttribute>(metadataType) && metadataType.GetAttributeValueOrThrowException(value: (Func<MetadataSubTypeAttribute, MetadataType>)(i => i.Parent)) == parent)
-                    list.Add(metadataType);
-            }
-            return list.ToArray();
+            return enumerable.Where(metadataType => HasMetadataAttribute<MetadataSubTypeAttribute>(metadataType) && metadataType.GetAttributeValueOrThrowException(value: (Func<MetadataSubTypeAttribute, MetadataType>) (i => i.Parent)) == parent).ToArray();
         }
 
         public static string GetSalesforceDirectory(this MetadataType metadata)
         {
             return metadata.GetAttributeValueOrDefault(value: (Func<SalesforceDirectory, string>)(i => i.SfDirectory));
-        }
-
-        public class AllowsWildcardAttributeMissingException : Exception
-        {
-            public AllowsWildcardAttributeMissingException(string message)
-                : base(message)
-            {
-            }
-        }
-
-        public class AttributeMissingException : Exception
-        {
-            public AttributeMissingException(string message)
-                : base(message)
-            {
-            }
         }
     }
 }

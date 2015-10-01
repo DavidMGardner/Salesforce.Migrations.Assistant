@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,51 +15,55 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
         [TestMethod]
         public void Test1()
         {
-            SalesforceDomainServices svc = new SalesforceDomainServices();
+            SalesforceRepository resp = new SalesforceRepository();
 
-            string username = "dave.gardner@us.sogeti.com";
-            string password = "@Tngds10!";
-            string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
-
-            svc.LoginSandbox(username, password, token);
-            //var @class = svc.QueryApexFileByName("CP_COM_ContractdetailsSvcController", "ApexClass");
-
-            //@class.ShouldBeOfType<SalesforceFileProxy>();
+            var list = resp.List;
         }
 
+        [TestMethod]
+        public void FilteredTest()
+        {
+            SalesforceRepository resp = new SalesforceRepository();
+            var list = resp.FilteredList;
+
+            var salesforceFileProxies = list as SalesforceFileProxy[] ?? list.ToArray();
+                salesforceFileProxies.ProcessFiles();
+
+            Assert.IsTrue(salesforceFileProxies.Any());
+        }
 
         [TestMethod]
         public void DownloadTests()
         {
-            SalesforceDomainServices svc = new SalesforceDomainServices();
-            string username = "dave.gardner@us.sogeti.com";
-            string password = "@Tngds10!";
-            string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
+            //SalesforceDomainServices svc = new SalesforceDomainServices();
+            //string username = "dave.gardner@us.sogeti.com";
+            //string password = "@Tngds10!";
+            //string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
 
-            svc.LoginSandbox(username, password, token);
-            var response = svc.DownloadAllFilesSynchronously(new PackageEntity
-            {   
-                Version = "29.0",
-                Types = new[] { new PackageEntity.PackageTypeEntity
-                {
-                    Name = "ApexClass",
-                    Members = new[] {"*"}
-                }, }
-            }, new CancellationToken());
+            //svc.LoginSandbox(username, password, token);
+            //var response = svc.DownloadAllFilesSynchronously(new PackageEntity
+            //{   
+            //    Version = "29.0",
+            //    Types = new[] { new PackageEntity.PackageTypeEntity
+            //    {
+            //        Name = "ApexClass",
+            //        Members = new[] {"*"}
+            //    }, }
+            //}, new CancellationToken());
 
-            Assert.IsTrue(response.Count > 0);
+            //Assert.IsTrue(response.Count > 0);
         }
 
 
         [TestMethod]
         public void QueryByFileName()
         {
-            SalesforceDomainServices svc = new SalesforceDomainServices();
-            string username = "dave.gardner@us.sogeti.com";
-            string password = "@Tngds10!";
-            string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
+            //SalesforceDomainServices svc = new SalesforceDomainServices();
+            //string username = "dave.gardner@us.sogeti.com";
+            //string password = "@Tngds10!";
+            //string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
 
-            svc.LoginSandbox(username, password, token);
+            //svc.LoginSandbox(username, password, token);
 
             //var file = svc.QueryApexFileByName("CP_COM_ContractdetailsSvcController", "ApexClass");
         }
@@ -67,12 +72,12 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
         [TestMethod]
         public void QueryByOperator()
         {
-            SalesforceDomainServices svc = new SalesforceDomainServices();
-            string username = "dave.gardner@us.sogeti.com";
-            string password = "@Tngds10!";
-            string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
+            //SalesforceDomainServices svc = new SalesforceDomainServices();
+            //string username = "dave.gardner@us.sogeti.com";
+            //string password = "@Tngds10!";
+            //string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
 
-            svc.LoginSandbox(username, password, token);
+            //svc.LoginSandbox(username, password, token);
 
             //var file = svc.QueryItemsByName(new SalesforceQuery()
             //                                    .Select("Id, Name, CreatedDate, CreatedById, NamespacePrefix, LastModifiedDate, Body")
@@ -106,18 +111,18 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
         [TestMethod]
         public void GetChangedFiles()
         {
-            SalesforceDomainServices svc = new SalesforceDomainServices();
-            string username = "dave.gardner@us.sogeti.com";
-            string password = "@Tngds10!";
-            string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
+            //SalesforceDomainServices svc = new SalesforceDomainServices();
+            //string username = "dave.gardner@us.sogeti.com";
+            //string password = "@Tngds10!";
+            //string token = "xoWNt5SPFiT0RZWo0QBQHqz8";
 
-            svc.LoginSandbox(username, password, token);
+            //svc.LoginSandbox(username, password, token);
 
-            var result = svc.GetFilesChangedSince(DateTimeOffset.Parse("09/21/2015"));
+            //var result = svc.GetFilesChangedSince(DateTimeOffset.Parse("09/21/2015"));
 
-            Console.WriteLine(result.Count());
+            //Console.WriteLine(result.Count());
 
-            Assert.IsTrue(result.Any());
+            //Assert.IsTrue(result.Any());
         }
     }
 }

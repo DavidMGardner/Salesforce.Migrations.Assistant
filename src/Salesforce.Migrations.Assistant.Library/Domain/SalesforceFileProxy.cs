@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
-    public class SalesforceFileProxy
+    public class SalesforceFileProxy : IEntity
     {
         private string _fileName;
 
