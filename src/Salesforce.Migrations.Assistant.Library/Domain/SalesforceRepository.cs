@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Salesforce.Migrations.Assistant.Library.Configuration;
 using Salesforce.Migrations.Assistant.Library.MetaDataService;
 using Serilog;
 
@@ -14,21 +15,17 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 {
     public class SalesforceRepository : IRepository<SalesforceFileProxy, string>
     {
-        private readonly SalesforceContext _salesforceContext;
         public double ApiVersion { get; }
 
-        private SalesforceContext GetContext => _salesforceContext;
+        public SalesforceContext GetContext { get; }
 
         public SalesforceRepository(SalesforceContext salesforceContext)
         {
-            InitalizeLogger();
-            _salesforceContext = salesforceContext;
-        }
+            if (salesforceContext == null) throw new InvalidSalesforceContextException();
 
-        public SalesforceRepository()
-        {
             InitalizeLogger();
-            _salesforceContext = new SalesforceContext();
+            GetContext = salesforceContext;
+            ApiVersion = 34.0;
         }
 
         public IEnumerable<SalesforceFileProxy> List => GetList(new CancellationToken());
@@ -113,18 +110,3 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
     }
 }
 
-
-
-//var fileName = String.Format("{0}\\fileproperties.json", ConfigurationManager.AppSettings["salesforce:context:workingdirectory"]);
-
-//EnsureFolder(fileName);
-
-//using (FileStream fs = File.Open(fileName, FileMode.Create))
-//using (StreamWriter sw = new StreamWriter(fs))
-//using (JsonWriter jw = new JsonTextWriter(sw))
-//{
-//    jw.Formatting = Formatting.Indented;
-
-//    JsonSerializer serializer = new JsonSerializer();
-//    serializer.Serialize(jw, response);
-//}

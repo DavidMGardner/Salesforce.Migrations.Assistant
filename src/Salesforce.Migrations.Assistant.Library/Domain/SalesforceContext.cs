@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Services.Protocols;
 using Salesforce.Migrations.Assistant.Library.AsyncHelpers;
+using Salesforce.Migrations.Assistant.Library.Configuration;
 using Salesforce.Migrations.Assistant.Library.Exceptions;
 using Salesforce.Migrations.Assistant.Library.MetaDataService;
 using Salesforce.Migrations.Assistant.Library.Partner.SforceService;
@@ -24,19 +25,19 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
     public class SalesforceContext
     {
-        private string _userName;
-        private string _password;
-        private string _token;
-        private SalesforceEnvironmentType _environmentType;
-        private string _url;
         private readonly ISalesforcePartnerServiceAdapter _partnerServiceAdapter;
         private readonly ISalesforceToolingServiceAdapter _toolingServiceAdapter;
         private readonly ISalesforceMetadataServiceAdapter _metadataServiceAdapter;
+
+        private SalesForceEnvionment _salesForceEnvionment;
 
         private string _sessionId;
         private bool _isLoggedIn;
 
         public IPollingResult PollingResult { get; }
+
+        public SalesForceEnvionment GetCurrentEnvionment => _salesForceEnvionment;
+
 
         public bool IsLoggedIn
         {
@@ -81,25 +82,31 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             }
         }
 
-        public SalesforceContext()
+        public SalesforceContext Initialize()
         {
-            SalesforceEnvironmentType envtype;
+            if (!string.IsNullOrWhiteSpace(_salesForceEnvionment.AuthorizationCredential.UserName) && 
+                !string.IsNullOrWhiteSpace(_salesForceEnvionment.AuthorizationCredential.Password) && 
+                !string.IsNullOrWhiteSpace(_salesForceEnvionment.AuthorizationCredential.Token))
+            {
+                Login(_salesForceEnvionment.AuthorizationCredential.UserName, 
+                    _salesForceEnvionment.AuthorizationCredential.Password, 
+                    _salesForceEnvionment.AuthorizationCredential.Token, 
+                    _salesForceEnvionment.AuthorizationCredential.EnvironmentType);
+            }
 
+            return this;
+        }
+
+        public SalesforceContext(SalesForceEnvionment salesForceEnvionment)
+        {
             _partnerServiceAdapter = new SalesforcePartnerServiceAdapter();
             _toolingServiceAdapter = new SalesforceToolingServiceAdapter();
             _metadataServiceAdapter = new SalesforceMetadataServiceAdapter();
-
             PollingResult = new AsyncExtensions.PollingResultHelper();
 
-            string username = ConfigurationManager.AppSettings["salesforce:context:username"];
-            string password = ConfigurationManager.AppSettings["salesforce:context:password"];
-            string token = ConfigurationManager.AppSettings["salesforce:context:token"];
-            bool parsedEnvironment = Enum.TryParse(ConfigurationManager.AppSettings["salesforce:context:environment"], out envtype);
+            _salesForceEnvionment = salesForceEnvionment;
 
-            if (parsedEnvironment && !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(token))
-            {
-                Login(username, password, token, envtype);
-            }
+            Initialize();
         }
 
         public bool LoginSandbox(string username, string password, string securityToken = null)
@@ -144,11 +151,11 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         private void SaveUserCredentials(string username, string password, string securityToken, SalesforceEnvironmentType environment, string domain)
         {
-            _userName = username;
-            _password = password;
-            _token = securityToken;
-            _environmentType = environment;
-            _url = domain;
+            _salesForceEnvionment.AuthorizationCredential.UserName = username;
+            _salesForceEnvionment.AuthorizationCredential.Password = password;
+            _salesForceEnvionment.AuthorizationCredential.Token = securityToken;
+            _salesForceEnvionment.AuthorizationCredential.EnvironmentType = environment;
+            _salesForceEnvionment.AuthorizationCredential.Url = domain;
         }
 
         private string GetEnvironment(SalesforceEnvironmentType environmentType)
@@ -189,7 +196,11 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         private bool ReLogin()
         {
-            return Login(_userName, _password, _token, _environmentType, _url);
+            return Login(_salesForceEnvionment.AuthorizationCredential.UserName,
+                        _salesForceEnvionment.AuthorizationCredential.Password, 
+                        _salesForceEnvionment.AuthorizationCredential.Password,
+                        _salesForceEnvionment.AuthorizationCredential.EnvironmentType,
+                        _salesForceEnvionment.AuthorizationCredential.Url);
         }
 
         public T SessionExpirationWrapper<T>(Func<T> adapterRequest)

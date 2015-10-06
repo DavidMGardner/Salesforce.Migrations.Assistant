@@ -13,38 +13,45 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 {
     static public class SalesforceFileProcessing
     {
-        public static void ProcessFiles(this IEnumerable<SalesforceFileProxy> proxies)
+        public static void ProcessFiles(this SalesforceRepository repository, string getProjectLocation)
         {
-            string directory = String.Format("{0}\\{1}", ConfigurationManager.AppSettings["salesforce:context:workingdirectory"], DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss"));
+            // IEnumerable<SalesforceFileProxy> 
+            string directory = String.Format("{0}\\{1}\\{2}", ConfigurationManager.AppSettings["salesforcemigrations:projectlocation"], repository.GetContext.GetCurrentEnvionment.Name, DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss"));
 
             EnsureFolder(directory);
 
-            proxies.Dump();
+            var proxies = repository.FilteredList;
+
+            var output = proxies.Select(s => new 
+            {
+                s.FileName,
+                s.FullName,
+                s.CreatedByName,
+                s.ModifiedByName,
+                s.PathInResource,
+                s.Type,
+                LastModifiedDate = s.LastModifiedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.LastModifiedDateUtcTicks) ?
+                                                                                DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.LastModifiedDateUtcTicks)),
+
+                CreatedDate = s.CreatedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.CreatedDateUtcTicks) ? 
+                                                                                DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.CreatedDateUtcTicks))
+            }).ToList();
+
+            output.Dump(directory,"rawresponse");
 
             foreach (SalesforceFileProxy salesforceFileProxy in proxies)
             {
+
                 WriteFile(salesforceFileProxy, directory);
             }
         }
 
-        private static void EnsureFolder(string path)
+        public static void EnsureFolder(string path)
         {
             string directoryName = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty(directoryName) && (!Directory.Exists(directoryName)))
             {
                 Directory.CreateDirectory(directoryName);
-            }
-        }
-
-        private static void Test()
-        {
-            IEnumerable<SalesforceFileProxy> fileProxies =
-                JsonConvert.DeserializeObject<IEnumerable<SalesforceFileProxy>>(File.ReadAllText(@"D:\\salesforce.migrations\\Salesforce.Migrations.Assistant.Library.Domain.SalesforceFileProxy[].json"));
-
-            if (fileProxies.Any())
-            {
-                string directory = ConfigurationManager.AppSettings["salesforce:context:workingdirectory"];
-                ProcessFiles(fileProxies);
             }
         }
 
@@ -59,7 +66,10 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             {
                 case 2:
                     {
-                        break;
+                        string objectDirectory = Path.Combine(directory, filepath[1]);
+                        EnsureFolder(objectDirectory);
+
+                        return objectDirectory;
                     }
 
                 case 3:
@@ -88,9 +98,9 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                 Writer.Flush();
                 Writer.Close();
             }
-            catch
+            catch(Exception ex)
             {
-                //...
+                Log.Error(ex.Message);
                 return false;
             }
 
@@ -108,13 +118,13 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         }
 
 
-        private static void Dump(this object o)
+        private static void Dump(this object o, string directory, string fileName)
         {
-            var fileName = String.Format("{0}\\{1}.json", ConfigurationManager.AppSettings["salesforce:context:workingdirectory"], o.GetType().ToString());
+            var outFileName = String.Format("{0}\\{1}.json", directory, fileName);
 
-            EnsureFolder(fileName);
+            EnsureFolder(outFileName);
 
-            using (FileStream fs = File.Open(fileName, FileMode.Create))
+            using (FileStream fs = File.Open(outFileName, FileMode.Create))
             using (StreamWriter sw = new StreamWriter(fs))
             using (JsonWriter jw = new JsonTextWriter(sw))
             {

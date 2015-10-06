@@ -34,6 +34,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         public string Type { get; set; }
         public FileInfo FileInfo { get; set; }
         public string CreatedByName { get; set; }
+        public string ModifiedByName { get; set; }
         public string NamespacePrefix { get; set; }
         public byte[] BinaryBody { get; set; }
         public string ResourceFileName { get; set; }

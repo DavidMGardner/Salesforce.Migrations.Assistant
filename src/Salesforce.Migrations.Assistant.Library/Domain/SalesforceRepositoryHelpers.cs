@@ -91,7 +91,10 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                 {
                     if (projectFileEntity.FileName == fileProperties.fileName)
                     {
+                        projectFileEntity.FullName = fileProperties.fullName;
+                        projectFileEntity.Id = fileProperties.id;
                         projectFileEntity.CreatedByName = fileProperties.createdByName;
+                        projectFileEntity.ModifiedByName = fileProperties.lastModifiedByName;
                         projectFileEntity.CreatedDateUtcTicks = fileProperties.createdDate.ToFileTimeUtc().ToString();
                         projectFileEntity.Id = fileProperties.id;
                         projectFileEntity.NamespacePrefix = fileProperties.namespacePrefix;
