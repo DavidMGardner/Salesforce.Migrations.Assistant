@@ -7,6 +7,7 @@ using System.Xml;
 using CLAP;
 using CLAP.Validation;
 using Salesforce.Migrations.Assistant.Library;
+using Salesforce.Migrations.Assistant.Library.Domain;
 
 namespace SalesforceMigrations
 {
@@ -33,7 +34,23 @@ namespace SalesforceMigrations
 
     internal class CommadParser
     {
-        [Verb(IsDefault = true)]
+        [Verb]
+        public static void PullAllEnvironments()
+        {
+            var ph = new ProjectHandler().Initialize();
+
+            foreach (string salesForcePullEnvionment in ph.GetPullEnviroments())
+            {
+                var ctx = ph.GetContext(salesForcePullEnvionment);
+                if (ctx != null)
+                {
+                    var resp = new SalesforceRepository(ctx);
+                    resp.ProcessFiles(ph.GetProjectLocation);
+                }
+            }
+        }
+
+        [Verb]
         public static void BuildPackage(
                         [DirectoryExists][Required] string workingdirectory,
                         [DirectoryExists][Required] string buildOutputDirectory,

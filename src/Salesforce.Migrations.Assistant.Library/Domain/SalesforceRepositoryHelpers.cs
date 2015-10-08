@@ -53,12 +53,16 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                 cancellationToken.ThrowIfCancellationRequested();
                 RetrieveResult result = task.Result;
 
-                string fileName = String.Format("{0}\\{1}\\{2}\\{3}.zip", ConfigurationManager.AppSettings["salesforcemigrations:projectlocation"], ctx.GetCurrentEnvionment.Name, DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss"), Guid.NewGuid().ToString());
-                SalesforceFileProcessing.EnsureFolder(fileName);
+                string fileName = String.Format("{0}\\{1}.zip", ctx.OutputLocation, Guid.NewGuid().ToString());
 
-                SalesforceFileProcessing.SaveData(fileName, result.zipFile);
-                
+                bool rawZip = Boolean.Parse(ConfigurationManager.AppSettings["salesforcemigrations:dumprawzip"]);
 
+                if(rawZip)
+                {
+                    SalesforceFileProcessing.EnsureFolder(fileName);
+                    SalesforceFileProcessing.SaveData(fileName, result.zipFile);
+                }
+               
                 List<SalesforceFileProxy> files = UnzipPackageFilesHelper.UnzipPackageFilesRecursive(result.zipFile);
 
                 UpdateFileProperties(files, result.fileProperties);

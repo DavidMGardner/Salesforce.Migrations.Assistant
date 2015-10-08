@@ -16,7 +16,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         public static void ProcessFiles(this SalesforceRepository repository, string getProjectLocation)
         {
             // IEnumerable<SalesforceFileProxy> 
-            string directory = String.Format("{0}\\{1}\\{2}", ConfigurationManager.AppSettings["salesforcemigrations:projectlocation"], repository.GetContext.GetCurrentEnvionment.Name, DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss"));
+            string directory = repository.GetContext.OutputLocation;
 
             EnsureFolder(directory);
 
@@ -41,7 +41,6 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
             foreach (SalesforceFileProxy salesforceFileProxy in proxies)
             {
-
                 WriteFile(salesforceFileProxy, directory);
             }
         }
@@ -66,8 +65,14 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             {
                 case 2:
                     {
+                        // this most likely is a share filename with multiple instances of the same file, we should check for duplicate
                         string objectDirectory = Path.Combine(directory, filepath[1]);
                         EnsureFolder(objectDirectory);
+
+                        if (File.Exists(objectDirectory))
+                        {
+                             objectDirectory = Path.Combine(directory, String.Format("{0}-{1}",Guid.NewGuid().ToString(),filepath[1]));
+                        }
 
                         return objectDirectory;
                     }
@@ -87,16 +92,15 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         public static bool SaveData(string fileName, byte[] data)
         {
-            BinaryWriter Writer = null;
             try
             {
                 // Create a new stream to write to the file
-                Writer = new BinaryWriter(File.OpenWrite(fileName));
+                var writer = new BinaryWriter(File.OpenWrite(fileName));
 
                 // Writer raw data                
-                Writer.Write(data);
-                Writer.Flush();
-                Writer.Close();
+                writer.Write(data);
+                writer.Flush();
+                writer.Close();
             }
             catch(Exception ex)
             {
@@ -110,7 +114,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         private static void WriteFile(SalesforceFileProxy salesforceFileProxy, string directory)
         {
             var filename = EnsureFileName(salesforceFileProxy.FileName, directory);
-
+            
             if (salesforceFileProxy.BinaryBody != null && !SaveData(filename, salesforceFileProxy.BinaryBody))
             {
                 Log.Error("Couldn't write binary file to disk");

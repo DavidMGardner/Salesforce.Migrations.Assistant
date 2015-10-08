@@ -29,7 +29,9 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         private readonly ISalesforceToolingServiceAdapter _toolingServiceAdapter;
         private readonly ISalesforceMetadataServiceAdapter _metadataServiceAdapter;
 
-        private SalesForceEnvionment _salesForceEnvionment;
+        private readonly SalesForceEnvionment _salesForceEnvionment;
+        private string _runTime;
+
 
         private string _sessionId;
         private bool _isLoggedIn;
@@ -38,7 +40,8 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         public SalesForceEnvionment GetCurrentEnvionment => _salesForceEnvionment;
 
-
+        public string OutputLocation => String.Format("{0}\\{1}\\{2}", ConfigurationManager.AppSettings["salesforcemigrations:projectlocation"], GetCurrentEnvionment.Name, _runTime);
+        
         public bool IsLoggedIn
         {
             get { return _isLoggedIn; }
@@ -93,6 +96,8 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                     _salesForceEnvionment.AuthorizationCredential.Token, 
                     _salesForceEnvionment.AuthorizationCredential.EnvironmentType);
             }
+
+            _runTime = DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss");
 
             return this;
         }
