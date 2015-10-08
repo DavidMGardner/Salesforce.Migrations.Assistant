@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -51,6 +52,13 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 RetrieveResult result = task.Result;
+
+                string fileName = String.Format("{0}\\{1}\\{2}\\{3}.zip", ConfigurationManager.AppSettings["salesforcemigrations:projectlocation"], ctx.GetCurrentEnvionment.Name, DateTime.Now.ToString("M-dd-yyyy-HH-mm-ss"), Guid.NewGuid().ToString());
+                SalesforceFileProcessing.EnsureFolder(fileName);
+
+                SalesforceFileProcessing.SaveData(fileName, result.zipFile);
+                
+
                 List<SalesforceFileProxy> files = UnzipPackageFilesHelper.UnzipPackageFilesRecursive(result.zipFile);
 
                 UpdateFileProperties(files, result.fileProperties);

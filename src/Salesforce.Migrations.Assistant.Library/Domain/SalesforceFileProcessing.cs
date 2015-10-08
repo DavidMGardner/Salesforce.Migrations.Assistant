@@ -85,7 +85,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             return String.Empty;
         }
 
-        private static bool SaveData(string fileName, byte[] data)
+        public static bool SaveData(string fileName, byte[] data)
         {
             BinaryWriter Writer = null;
             try
