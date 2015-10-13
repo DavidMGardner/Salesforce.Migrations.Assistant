@@ -2,39 +2,39 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Salesforce.Migrations.Assistant.Library.Configuration;
+using Salesforce.Migrations.Assistant.Library.Exceptions;
 using Salesforce.Migrations.Assistant.Library.MetaDataService;
 using Serilog;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
+    public interface IPersistenceStrategy
+    {
+        SalesforceContext Context { get; set; }
+        void Save(List<SalesforceFileProxy> filesToSave);
+    }
+
     public class SalesforceRepository : IRepository<SalesforceFileProxy, string>
     {
         public double ApiVersion { get; }
 
         public SalesforceContext GetContext { get; }
+        private readonly IPersistenceStrategy _persistenceStrategy;
 
-        public SalesforceRepository(SalesforceContext salesforceContext)
+        public SalesforceRepository(SalesforceContext salesforceContext, IPersistenceStrategy persistenceStrategy)
         {
             if (salesforceContext == null) throw new InvalidSalesforceContextException();
 
             InitalizeLogger();
             GetContext = salesforceContext;
+            _persistenceStrategy = persistenceStrategy;
+            _persistenceStrategy.Context = GetContext;
             ApiVersion = 34.0;
-        }
-
-        public IEnumerable<SalesforceFileProxy> List => GetList(new CancellationToken());
-        public IEnumerable<SalesforceFileProxy> FilteredList => GetFilteredList(new CancellationToken());
-
-        private IEnumerable<SalesforceFileProxy> GetList(CancellationToken cancellationToken)
-        {
-            PackageEntity pe = new PackageEntity().BuildQueryAllCommonTypes();
-            return SalesforceRepositoryHelpers.DownloadAllFilesSynchronously(pe, GetContext, cancellationToken);
         }
 
         private void InitalizeLogger()
@@ -46,19 +46,16 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         private ListMetadataQuery[] BuildTypes(string[] types)
         {
-            IEnumerable<ListMetadataQuery> typeList = types.Select(s => new ListMetadataQuery() {type = s});
+            IEnumerable<ListMetadataQuery> typeList = types.Select(s => new ListMetadataQuery() { type = s });
             return typeList.ToArray();
         }
 
-
-        private IEnumerable<SalesforceFileProxy> GetFilteredList(CancellationToken cancellationToken)
+        public IEnumerable<SalesforceFileProxy> DownloadFiles(PackageEntity pe, CancellationToken cancellationToken)
         {
-            var pe = GetLatestFilesByDateOffSet(DateTime.Now.AddDays(-1));
             return SalesforceRepositoryHelpers.DownloadAllFilesSynchronously(pe, GetContext, cancellationToken);
         }
 
-
-        private PackageEntity GetLatestFilesByDateOffSet(DateTime dto)
+        public PackageEntity GetLatestFiles(Func<MetaDataService.FileProperties, int, bool> predicate)
         {
             var query = BuildTypes(new string[]
             {
@@ -69,16 +66,16 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             var response = query.Batch(3).Select(s => GetContext.MetadataServiceAdapter
                                                         .ListMetadata(s.ToArray(), 34.0))
                                                         .SelectMany(sm => sm)
-                                                        .Where(w=>w.fullName.Contains("CP_") && w.lastModifiedDate >= dto)
+                                                        .Where(predicate)
                                                         .GroupBy(g => g.type)
-                                                        .Select(s=> new PackageTypeEntity
+                                                        .Select(s => new PackageTypeEntity
                                                         {
                                                             Name = s.Key,
                                                             Members = s.Select(sm => sm.fullName).ToArray()
                                                         })
                                                         .ToArray();
 
-            return new PackageEntity { Version = "29.0", Types = response }; 
+            return new PackageEntity { Version = "29.0", Types = response };
         }
 
 
@@ -102,6 +99,23 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             throw new NotImplementedException();
         }
 
+        public void SaveLocal(IEnumerable<SalesforceFileProxy> entities)
+        {
+            if (_persistenceStrategy == null) throw new InvalidPersistenceStrategyException();
+
+            _persistenceStrategy.Save(entities.ToList());
+        }
+
+        public void SaveLocal(Func<MetaDataService.FileProperties, int, bool> predicate, CancellationToken cancellationToken)
+        {
+            if (_persistenceStrategy == null) throw new InvalidPersistenceStrategyException();
+
+            var entity = GetLatestFiles(predicate);
+            var pe = DownloadFiles(entity, cancellationToken);
+
+            SaveLocal(pe);
+        }
+
         public string RunDeployment(byte[] zipFile, DeployOptions deployOptions)
         {
             var id = GetContext.MetadataServiceAdapter.Deploy(zipFile, deployOptions).id;
@@ -109,4 +123,22 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         }
     }
 }
+
+
+
+/*
+
+        private IEnumerable<SalesforceFileProxy> GetFilteredList(CancellationToken cancellationToken)
+        {
+            var pe = GetLatestFilesByDateOffSet(DateTime.Now.AddDays(-1));
+            return SalesforceRepositoryHelpers.DownloadAllFilesSynchronously(pe, GetContext, cancellationToken);
+        }
+
+
+        private PackageEntity GetLatestFilesByDateOffSet(DateTime dto)
+        {
+            return GetLatestFiles((properties, i) => properties.fullName.Contains("CP_") && properties.lastModifiedDate >= dto);
+        }
+
+    */
 

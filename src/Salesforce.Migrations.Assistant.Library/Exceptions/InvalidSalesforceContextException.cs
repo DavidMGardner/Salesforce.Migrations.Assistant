@@ -1,6 +1,6 @@
 using System;
 
-namespace Salesforce.Migrations.Assistant.Library.Domain
+namespace Salesforce.Migrations.Assistant.Library.Exceptions
 {
     public class InvalidSalesforceContextException : Exception
     {

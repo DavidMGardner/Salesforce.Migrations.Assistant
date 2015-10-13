@@ -11,40 +11,44 @@ using Serilog;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
+  
+
+
+
     static public class SalesforceFileProcessing
     {
-        public static void ProcessFiles(this SalesforceRepository repository, string getProjectLocation)
-        {
-            // IEnumerable<SalesforceFileProxy> 
-            string directory = repository.GetContext.OutputLocation;
+        //public static void ProcessFiles(this SalesforceRepository repository, string getProjectLocation)
+        //{
+        //    // IEnumerable<SalesforceFileProxy> 
+        //    string directory = repository.GetContext.OutputLocation;
 
-            EnsureFolder(directory);
+        //    EnsureFolder(directory);
 
-            var proxies = repository.FilteredList;
+        //    var proxies = repository.FilteredList;
 
-            var output = proxies.Select(s => new 
-            {
-                s.FileName,
-                s.FullName,
-                s.CreatedByName,
-                s.ModifiedByName,
-                s.PathInResource,
-                s.Type,
-                LastModifiedDate = s.LastModifiedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.LastModifiedDateUtcTicks) ?
-                                                                                DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.LastModifiedDateUtcTicks)),
+        //    var output = proxies.Select(s => new 
+        //    {
+        //        s.FileName,
+        //        s.FullName,
+        //        s.CreatedByName,
+        //        s.ModifiedByName,
+        //        s.PathInResource,
+        //        s.Type,
+        //        LastModifiedDate = s.LastModifiedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.LastModifiedDateUtcTicks) ?
+        //                                                                        DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.LastModifiedDateUtcTicks)),
 
-                CreatedDate = s.CreatedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.CreatedDateUtcTicks) ? 
-                                                                                DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.CreatedDateUtcTicks))
-            }).ToList();
+        //        CreatedDate = s.CreatedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.CreatedDateUtcTicks) ? 
+        //                                                                        DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.CreatedDateUtcTicks))
+        //    }).ToList();
 
-            output.Dump(directory,"rawresponse");
+        //    output.Dump(directory,"rawresponse");
 
-            foreach (SalesforceFileProxy salesforceFileProxy in proxies)
-            {
-                WriteFile(salesforceFileProxy, directory);
-            }
-        }
-
+        //    foreach (SalesforceFileProxy salesforceFileProxy in proxies)
+        //    {
+        //        WriteFile(salesforceFileProxy, directory);
+        //    }
+        //}
+        
         public static void EnsureFolder(string path)
         {
             string directoryName = Path.GetDirectoryName(path);

@@ -93,8 +93,10 @@
     <Compile Include="DomainAttributes\SupportedAttribute.cs" />
     <Compile Include="Domain\ApexAdapter.cs" />
     <Compile Include="Domain\ApexMemberProxy.cs" />
+    <Compile Include="Domain\DateTimeDirectoryStrategy.cs" />
     <Compile Include="Domain\Extensions.cs" />
-    <Compile Include="Domain\InvalidSalesforceContextException.cs" />
+    <Compile Include="Exceptions\InvalidPersistenceStrategyException.cs" />
+    <Compile Include="Exceptions\InvalidSalesforceContextException.cs" />
     <Compile Include="Domain\ProjectHandler.cs" />
     <Compile Include="Domain\SalesforceFileProcessing.cs" />
     <Compile Include="Domain\SalesforceRepositoryHelpers.cs" />

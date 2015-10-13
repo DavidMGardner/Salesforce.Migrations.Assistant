@@ -20,7 +20,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         public string GetProjectLocation { get; } = ConfigurationManager.AppSettings["SalesforceMigrations:ProjectLocation"];
 
-        public DateTime LastRun { get; set; } = DateTime.Now;
+        
 
         public ProjectHandler()
         {
@@ -44,21 +44,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             return this;
         }
 
-        public bool UpdateLastRun()
-        {
-            return UpdateLastRun(LastRun);
-        }
-
-        public bool UpdateLastRun(DateTime dt)
-        {
-            _salesforceMigrationsProject.LastRun = dt;
-
-            if (SaveProject())
-                return true;
-
-            return false;
-        }
-
+      
         public bool SaveProject()
         {
             string fileName = String.Format("{0}\\{1}", GetProjectLocation, _projectName);
