@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using CLAP;
@@ -44,8 +45,8 @@ namespace SalesforceMigrations
                 var ctx = ph.GetContext(salesForcePullEnvionment);
                 if (ctx != null)
                 {
-                    var resp = new SalesforceRepository(ctx);
-                    resp.ProcessFiles(ph.GetProjectLocation);
+                    var resp = new SalesforceRepository(ctx, new DateTimeDirectoryStrategy());
+                    resp.SaveLocal(((fp, i) => fp.fullName.Contains("CP_") && fp.lastModifiedDate >= DateTime.Now.AddDays(-1)), CancellationToken.None);
                 }
             }
         }
