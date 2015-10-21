@@ -255,5 +255,29 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             }
             return retrieveResult;
         }
+
+        public MetaDataService.DeployResult CheckDeployResult(string id)
+        {
+            MetaDataService.DeployResult deployResult = null;
+            try
+            {
+                deployResult = SessionExpirationWrapper(() => _metadataServiceAdapter.CheckDeployResult(id));
+
+                if (deployResult.done == false)
+                    return null;
+            }
+            catch (SoapException ex)
+            {
+                if (ex.Message != "INVALID_ID_FIELD: Deployment still in process: InProgress")
+                {
+                    if (ex.Message != "INVALID_ID_FIELD: Deployment still in process: Queued")
+                    {
+                        Log.Error(ex.Message);
+                        throw;
+                    }
+                }
+            }
+            return deployResult;
+        }
     }
 }

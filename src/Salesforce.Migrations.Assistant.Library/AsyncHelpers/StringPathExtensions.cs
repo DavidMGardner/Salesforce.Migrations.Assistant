@@ -25,5 +25,11 @@ namespace Salesforce.Migrations.Assistant.Library.AsyncHelpers
             path = path.Replace('/', Path.DirectorySeparatorChar);
             return path;
         }
+
+        public static string ReplaceWebSeparator(this string path)
+        {
+            path = path.Replace('\\', '/');
+            return path;
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         public string SalesforceMetadata { get; set; }
 
         
-
+ 
         public string GetSalesforceMetadataValue(string metadataKey)
         {
             XNamespace xnamespace = (XNamespace)"http://soap.sforce.com/2006/04/metadata";

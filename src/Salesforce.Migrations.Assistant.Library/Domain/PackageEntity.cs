@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
@@ -39,6 +40,29 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             });
 
             return this;
+        }
+
+        public XmlDocument GetXml()
+        {
+            XmlOutput xo = new XmlOutput()
+           .XmlDeclaration()
+           .Node("package").Attribute("xmlns", "http://soap.sforce.com/2006/04/metadata").Within();
+
+            foreach (var salesForceChange in Types)
+            {
+                XmlOutput xmlOutput = xo.Node("types").Within();
+                foreach (var member in salesForceChange.Members)
+                {
+                    xmlOutput.Node("members").InnerText(member);
+                }
+                xmlOutput.Node("name").InnerText(salesForceChange.Name)
+                       .EndWithin();
+            }
+
+            xo.EndWithin()
+            .Node("version").InnerText(this.Version);
+
+            return xo.GetXmlDocument();
         }
     }
 }

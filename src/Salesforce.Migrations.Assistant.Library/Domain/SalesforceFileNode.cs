@@ -45,6 +45,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         }
 
         public abstract MetadataType Type { get; }
+        public bool AddToPackage { get; set; }
 
         public DateTime LastModifiedDateOnRemote { get; set; }
 

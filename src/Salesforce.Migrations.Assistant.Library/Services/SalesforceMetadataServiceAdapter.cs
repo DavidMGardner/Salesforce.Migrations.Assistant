@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Moo.Extenders;
 using Salesforce.Migrations.Assistant.Library.MetaDataService;
 
 namespace Salesforce.Migrations.Assistant.Library.Services
@@ -60,9 +61,11 @@ namespace Salesforce.Migrations.Assistant.Library.Services
             return retrieveResult;
         }
 
-        public DeployResult CheckDeployResult(string asyncProcessId)
+        public MetaDataService.DeployResult CheckDeployResult(string asyncProcessId)
         {
-            return _service.checkDeployStatus(asyncProcessId, true);
+            var result = _service.checkDeployStatus(asyncProcessId, true);
+
+            return result;
         }
 
         public AsyncResult Deploy(byte[] zipFile, Domain.DeployOptions options)

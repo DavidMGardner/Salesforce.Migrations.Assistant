@@ -6,49 +6,108 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Newtonsoft.Json;
 using Serilog;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Salesforce.Migrations.Assistant.Library.Domain
 {
-  
-
-
-
     static public class SalesforceFileProcessing
     {
-        //public static void ProcessFiles(this SalesforceRepository repository, string getProjectLocation)
-        //{
-        //    // IEnumerable<SalesforceFileProxy> 
-        //    string directory = repository.GetContext.OutputLocation;
+        public static XmlDocument GetPackageXml(this List<SalesforceFileProxy> fileProxies)
+        {
+            // save a mater package xml with all types
+            var grouped = fileProxies
+                            .Where(w => !String.IsNullOrWhiteSpace(w.FullName))
+                            .GroupBy(g => g.Type)
+                            .Where(gw => gw.Key.ToLowerInvariant() != "package" && gw.Key.ToLowerInvariant() != "zip")
+                            .Select(s => new PackageTypeEntity
+                            {
+                                Name = s.Key,
+                                Members = s.Select(sm => sm.FullName).ToArray()
+                            }).ToArray();
 
-        //    EnsureFolder(directory);
+            var pe = new PackageEntity { Version = "29.0", Types = grouped };
 
-        //    var proxies = repository.FilteredList;
+            return pe.GetXml();
+        }
 
-        //    var output = proxies.Select(s => new 
-        //    {
-        //        s.FileName,
-        //        s.FullName,
-        //        s.CreatedByName,
-        //        s.ModifiedByName,
-        //        s.PathInResource,
-        //        s.Type,
-        //        LastModifiedDate = s.LastModifiedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.LastModifiedDateUtcTicks) ?
-        //                                                                        DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.LastModifiedDateUtcTicks)),
+        public static string EnsureResourceFileName(string file, string directory)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+                return string.Empty;
 
-        //        CreatedDate = s.CreatedDateUtcTicks == null && String.IsNullOrWhiteSpace(s.CreatedDateUtcTicks) ? 
-        //                                                                        DateTime.MinValue : DateTime.FromFileTimeUtc(long.Parse(s.CreatedDateUtcTicks))
-        //    }).ToList();
+            var filepath = file.Split('\\');
 
-        //    output.Dump(directory,"rawresponse");
+            if (filepath.Length > 3)
+            {
+                StringBuilder filePathBuilder = new StringBuilder();
+                for (int i = 1; i < filepath.Length; i++)
+                {
+                    filePathBuilder.AppendFormat(String.Format("\\{0}", filepath[i]));
+                }
 
-        //    foreach (SalesforceFileProxy salesforceFileProxy in proxies)
-        //    {
-        //        WriteFile(salesforceFileProxy, directory);
-        //    }
-        //}
-        
+                string objectDirectory = Path.Combine(String.Format("{0}\\{1}", directory, filePathBuilder.ToString()));
+                SalesforceFileProcessing.EnsureFolder(objectDirectory);
+
+                return objectDirectory;
+            }
+
+
+            return string.Empty;
+        }
+
+        public static string EnsureFileName(string file, string directory)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+                return string.Empty;
+
+            var filepath = file.Split('/');
+
+            if (filepath.Length >= 3)
+            {
+                StringBuilder filePathBuilder = new StringBuilder();
+                for (int i = 1; i < filepath.Length; i++)
+                {
+                    filePathBuilder.AppendFormat(String.Format("\\{0}", filepath[i]));
+                }
+
+                string objectDirectory = Path.Combine(String.Format("{0}\\{1}", directory, filePathBuilder.ToString()));
+                SalesforceFileProcessing.EnsureFolder(objectDirectory);
+
+                return objectDirectory;
+            }
+
+            // lame special handling
+            switch (filepath.Length)
+            {
+                case 1:
+                    {
+                        string objectDirectory = Path.Combine(directory, file);
+                        SalesforceFileProcessing.EnsureFolder(objectDirectory);
+
+                        return objectDirectory;
+                    }
+                case 2:
+                    {
+                        // this most likely is a share filename with multiple instances of the same file, we should check for duplicate
+                        string objectDirectory = Path.Combine(directory, filepath[1]);
+                        SalesforceFileProcessing.EnsureFolder(objectDirectory);
+
+                        if (File.Exists(objectDirectory))
+                        {
+                            objectDirectory = Path.Combine(directory, String.Format("{0}-{1}", Guid.NewGuid().ToString(), filepath[1]));
+                        }
+
+                        return objectDirectory;
+                    }
+            }
+
+            return String.Empty;
+        }
+
+
         public static void EnsureFolder(string path)
         {
             string directoryName = Path.GetDirectoryName(path);
@@ -58,43 +117,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             }
         }
 
-        private static string EnsureFileName(string file, string directory)
-        {
-            if (string.IsNullOrWhiteSpace(file))
-                return string.Empty;
-
-            var filepath = file.Split('/');
-
-            switch (filepath.Length)
-            {
-                case 2:
-                    {
-                        // this most likely is a share filename with multiple instances of the same file, we should check for duplicate
-                        string objectDirectory = Path.Combine(directory, filepath[1]);
-                        EnsureFolder(objectDirectory);
-
-                        if (File.Exists(objectDirectory))
-                        {
-                             objectDirectory = Path.Combine(directory, String.Format("{0}-{1}",Guid.NewGuid().ToString(),filepath[1]));
-                        }
-
-                        return objectDirectory;
-                    }
-
-                case 3:
-                    {
-                        string objectDirectory = Path.Combine(directory, filepath[1]);
-                        var newPath = Path.Combine(objectDirectory, filepath[2]);
-                        EnsureFolder(newPath);
-
-                        return newPath;
-                    }
-            }
-
-            return String.Empty;
-        }
-
-        public static bool SaveData(string fileName, byte[] data)
+        public static bool SaveByteArray(string fileName, byte[] data)
         {
             try
             {
@@ -106,7 +129,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
                 writer.Flush();
                 writer.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return false;
@@ -114,17 +137,6 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
             return true;
         }
-
-        private static void WriteFile(SalesforceFileProxy salesforceFileProxy, string directory)
-        {
-            var filename = EnsureFileName(salesforceFileProxy.FileName, directory);
-            
-            if (salesforceFileProxy.BinaryBody != null && !SaveData(filename, salesforceFileProxy.BinaryBody))
-            {
-                Log.Error("Couldn't write binary file to disk");
-            }
-        }
-
 
         private static void Dump(this object o, string directory, string fileName)
         {

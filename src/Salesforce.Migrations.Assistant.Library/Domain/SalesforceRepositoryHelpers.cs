@@ -18,6 +18,16 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             return DownloadAllFilesSynchronously(pe, ctx, cancellationToken);
         }
 
+        public static MetaDataService.DeployResult WaitDeployResult(string id, SalesforceContext ctx, CancellationToken cancellationToken)
+        {
+            Task<MetaDataService.DeployResult> task = Task<MetaDataService.DeployResult>.Factory.StartNew(() => ctx.PollingResult.PollForResultWrapper(3, 180, 3, () =>
+                       ctx.CheckDeployResult(id), res => res != null, cancellationToken), cancellationToken);
+
+            ctx.WaitAllTaskskWithHandlingAggregateException(new[] { task }, cancellationToken);
+
+            return task.Result;
+        }
+
         public static List<SalesforceFileProxy> DownloadAllFilesSynchronously(PackageEntity package, SalesforceContext ctx,  CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -59,8 +69,15 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
                 if(rawZip)
                 {
-                    SalesforceFileProcessing.EnsureFolder(fileName);
-                    SalesforceFileProcessing.SaveData(fileName, result.zipFile);
+                    var rawZipFile = new SalesforceFileProxy
+                    {
+                        FullName = result.id,
+                        FileName = String.Format("unpackaged/zips/{0}.zip", result.id),
+                        Type = "zip",
+                        BinaryBody = result.zipFile
+                    };
+
+                    listFileProxies.Add(rawZipFile);
                 }
                
                 List<SalesforceFileProxy> files = UnzipPackageFilesHelper.UnzipPackageFilesRecursive(result.zipFile);

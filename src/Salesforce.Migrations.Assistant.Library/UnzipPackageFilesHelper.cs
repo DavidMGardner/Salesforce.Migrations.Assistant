@@ -33,6 +33,7 @@ namespace Salesforce.Migrations.Assistant.Library
                         projectFileEntity.Type = "StaticResourceZip";
                         zipList.AddRange(zipList);
                     }
+                    sffp.AddRange(zipList);
                 }
             }
             return sffp;
@@ -61,7 +62,7 @@ namespace Salesforce.Migrations.Assistant.Library
             ZipFile zipFile = new ZipFile();
             foreach (IDeployableItem deployableItem in (IEnumerable<IDeployableItem>)items)
             {
-                string entryName = Path.Combine("unpackaged", MetadataTypeExtensions.GetSalesforceDirectory(deployableItem.Type).ToLower(), Path.GetFileName(deployableItem.Name)).Replace("\\", "/");
+                string entryName = Path.Combine("unpackaged", deployableItem.Type.GetSalesforceDirectory().ToLower(), Path.GetFileName(deployableItem.Name)).Replace("\\", "/");
                 zipFile.AddEntry(entryName, deployableItem.FileBody);
             }
             zipFile.AddEntry("unpackaged/package.xml", packageXml);
@@ -89,7 +90,7 @@ namespace Salesforce.Migrations.Assistant.Library
                 if (!zipEntry.IsDirectory)
                 {
                     zipEntry.OpenReader().Read(buffer, 0, buffer.Length);
-                    string str = StringPathExtensions.ReplaceUnixDirectorySeparator(Path.Combine(fileName, zipEntry.FileName));
+                    string str = Path.Combine(fileName, zipEntry.FileName).ReplaceUnixDirectorySeparator().ReplaceWebSeparator();
                     SalesforceFileProxy projectFileEntity = new SalesforceFileProxy()
                     {
                         BinaryBody = buffer,
