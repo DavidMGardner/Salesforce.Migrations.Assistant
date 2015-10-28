@@ -144,7 +144,7 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
         {
             var ph = new ProjectHandler().Initialize();
 
-            var resp = new SalesforceRepository(ph.GetContext("Dev58 SandBox"), new DateTimeDirectoryStrategy());
+            var resp = new SalesforceRepository(ph.GetContext("Dev58 SandBox"), new NoPullStrategy());
 
             var options = new DeployOptions()
             {
@@ -154,8 +154,7 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
                 RollbackOnError = true
             };
 
-            var zip = resp.PackageStaticResources(@"D:\salesforce.migrations\solution\Dev49 SandBox\10-13-2015-16-08-55", options);
-            var id = resp.RunDeployment(zip, options);
+            var id = resp.Deploy(@"D:\salesforce.migrations\solution\Dev49 SandBox\10-13-2015-16-08-55", options);
 
             MetaDataService.DeployResult result = SalesforceRepositoryHelpers.WaitDeployResult(id, resp.GetContext, new CancellationToken());
 
@@ -173,13 +172,11 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
             Assert.IsTrue(result.done);
         }
 
-
-        [TestMethod]
-        public void DeploymentZipFileTest()
+        public void PushDeployAllFiles()
         {
             var ph = new ProjectHandler().Initialize();
 
-            var resp = new SalesforceRepository(ph.GetContext("Dev58 SandBox"), new DateTimeDirectoryStrategy());
+            var resp = new SalesforceRepository(ph.GetContext("Dev58 SandBox"),null, new VisualForceDeploymentStrategy());
 
             var options = new DeployOptions()
             {
@@ -189,27 +186,49 @@ namespace Salesforce.Migrations.Assistant.Library.Tests
                 RollbackOnError = true
             };
 
-            using (ZipFile zip = ZipFile.Read(@"D:\salesforce.migrations\solution\Dev49 SandBox\10-13-2015-16-08-55\package_13add8bf-8deb-4561-bea1-2554b537d577\unpackaged.zip"))
-            {
-                MemoryStream memoryStream = new MemoryStream();
-                zip.Save((Stream)memoryStream);
 
-                var id = resp.RunDeployment(memoryStream.ToArray(), options);
-                MetaDataService.DeployResult result = SalesforceRepositoryHelpers.WaitDeployResult(id, resp.GetContext, new CancellationToken());
-
-                if (result.details.componentFailures != null)
-                {
-                    foreach (DeployMessage item in result.details.componentFailures)
-                    {
-                        if (!string.IsNullOrWhiteSpace(item.problem))
-                        {
-                            Console.WriteLine(item.problem);
-                        }
-                    }
-                }
-
-                Assert.IsTrue(result.done);
-            }
+            resp.Deploy(@"D:\\salesforce.migrations\\solution\\Dev54 SandBox\\_current", options);
         }
+
+
+        //[TestMethod]
+        //public void DeploymentZipFileTest()
+        //{
+        //    var ph = new ProjectHandler().Initialize();
+
+        //    var resp = new SalesforceRepository(ph.GetContext("Dev58 SandBox"), new DateTimeDirectoryStrategy());
+
+        //    var options = new DeployOptions()
+        //    {
+        //        CheckOnly = false,
+        //        IgnoreWarnings = false,
+        //        PerformeRetrive = false,
+        //        RollbackOnError = true
+        //    };
+
+        //    using (ZipFile zip = ZipFile.Read(@"D:\salesforce.migrations\solution\Dev49 SandBox\10-13-2015-16-08-55\package_13add8bf-8deb-4561-bea1-2554b537d577\unpackaged.zip"))
+        //    {
+        //        MemoryStream memoryStream = new MemoryStream();
+        //        zip.Save((Stream)memoryStream);
+
+        //        var id = resp.RunDeployment(memoryStream.ToArray(), options);
+        //        MetaDataService.DeployResult result = SalesforceRepositoryHelpers.WaitDeployResult(id, resp.GetContext, new CancellationToken());
+
+        //        if (result.details.componentFailures != null)
+        //        {
+        //            foreach (DeployMessage item in result.details.componentFailures)
+        //            {
+        //                if (!string.IsNullOrWhiteSpace(item.problem))
+        //                {
+        //                    Console.WriteLine(item.problem);
+        //                }
+        //            }
+        //        }
+
+        //        Assert.IsTrue(result.done);
+        //    }
+        //}
     }
+
+    
 }

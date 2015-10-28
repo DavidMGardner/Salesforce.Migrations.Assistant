@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Ionic.Zip;
 using Salesforce.Migrations.Assistant.Library.AsyncHelpers;
@@ -8,6 +9,51 @@ using Salesforce.Migrations.Assistant.Library.Domain;
 
 namespace Salesforce.Migrations.Assistant.Library
 {
+    static public class ZipPackageFileHelper
+    {
+        public static byte[] ReadAllBytes(string fileName)
+        {
+            byte[] buffer = null;
+            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, (int)fs.Length);
+            }
+            return buffer;
+        }
+
+        static public PackageEntity BuildPackageXML(IList<IDeployableItem> items)
+        {
+            var response = items.GroupBy(g => g.Type)
+              .Select(s => new PackageTypeEntity
+              {
+                  Name = s.Key.ToString(),
+                  Members = s.Select(sm => sm.FileNameWithoutExtension).ToArray()
+              })
+              .ToArray();
+
+            return new PackageEntity { Version = "29.0", Types = response };
+        }
+
+        static public byte[] ZipObjectsForDeploy(IList<IDeployableItem> items)
+        {
+            ZipFile zipFile = new ZipFile();
+            foreach (IDeployableItem deployableItem in (IEnumerable<IDeployableItem>)items)
+            {
+                string entryName = Path.Combine("unpackaged", deployableItem.Type.GetSalesforceDirectory().ToLower(), Path.GetFileName(deployableItem.Name)).Replace("\\", "/");
+                zipFile.AddEntry(entryName, deployableItem.FileBody);
+            }
+
+            string xml = BuildPackageXML(items).GetXml().OuterXml;
+
+            zipFile.AddEntry("unpackaged/package.xml", xml);
+            MemoryStream memoryStream = new MemoryStream();
+            zipFile.Save((Stream)memoryStream);
+            return memoryStream.ToArray();
+        }
+    }
+
+
     static public class UnzipPackageFilesHelper
     {
         static public List<SalesforceFileProxy> UnzipPackageFilesRecursive(byte[] zip)

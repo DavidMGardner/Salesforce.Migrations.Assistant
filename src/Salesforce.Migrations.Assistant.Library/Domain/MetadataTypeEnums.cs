@@ -254,5 +254,6 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         XOrgHub,
         [AllowsWildcard(true)]
         XOrgHubSharedObject,
+        Unknown
     }
 }

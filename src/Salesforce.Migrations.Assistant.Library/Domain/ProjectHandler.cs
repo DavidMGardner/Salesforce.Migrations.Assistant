@@ -19,13 +19,8 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         private SalesforceMigrationsProject _salesforceMigrationsProject = new SalesforceMigrationsProject();
 
         public string GetProjectLocation { get; } = ConfigurationManager.AppSettings["SalesforceMigrations:ProjectLocation"];
-
         
-
-        public ProjectHandler()
-        {
-
-        }
+        public string Get => JsonConvert.SerializeObject(_salesforceMigrationsProject, Formatting.Indented, new JsonSerializerSettings { });
 
         public ProjectHandler Initialize()
         {
@@ -44,15 +39,18 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             return this;
         }
 
-      
         public bool SaveProject()
         {
             string fileName = String.Format("{0}\\{1}", GetProjectLocation, _projectName);
+            return SaveProject(fileName);
+        }
 
-            SalesforceFileProcessing.EnsureFolder(fileName);
+        public bool SaveProject(string filename)
+        {
+            SalesforceFileProcessing.EnsureFolder(filename);
             try
             {
-                using (FileStream fs = File.Open(fileName, FileMode.Create))
+                using (FileStream fs = File.Open(filename, FileMode.Create))
                 using (StreamWriter sw = new StreamWriter(fs))
                 using (JsonWriter jw = new JsonTextWriter(sw))
                 {
@@ -83,8 +81,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
         public SalesForceEnvionment GetEnviromentsByName(string name)
         {
-            return
-                _salesforceMigrationsProject.Environments.FirstOrDefault(w => String.Equals(w.Name, name, StringComparison.InvariantCultureIgnoreCase));
+            return _salesforceMigrationsProject.Environments.FirstOrDefault(w => String.Equals(w.Name, name, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public SalesforceContext GetContext(string name)
