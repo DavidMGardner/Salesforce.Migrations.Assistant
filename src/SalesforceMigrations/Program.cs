@@ -134,7 +134,56 @@ namespace SalesforceMigrations
             var ph = new ProjectHandler().Initialize();
             ph.SaveProject(Path.Combine(location, projectname));
         }
-        
+
+        [Verb]
+        public static void PushResources([Required] string environment, string packagedirectory)
+        {
+            var ph = new ProjectHandler().Initialize();
+
+            if (String.IsNullOrWhiteSpace(packagedirectory))
+                packagedirectory = System.IO.Directory.GetCurrentDirectory();
+            
+            Console.WriteLine("Pushing from: {0}", packagedirectory);
+
+            try
+            {
+                var resp = new SalesforceRepository(ph.GetContext(environment), null, new VisualForceDeploymentStrategy());
+
+                var options = new DeployOptions()
+                {
+                    CheckOnly = false,
+                    IgnoreWarnings = false,
+                    PerformeRetrive = false,
+                    RollbackOnError = true
+                };
+
+                var id = resp.Deploy(packagedirectory, options);
+
+                Salesforce.Migrations.Assistant.Library.MetaDataService.DeployResult result = SalesforceRepositoryHelpers.WaitDeployResult(id, resp.GetContext, new CancellationToken());
+
+                if (result.details.componentFailures != null)
+                {
+                    foreach (DeployMessage item in result.details.componentFailures)
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.problem))
+                        {
+                            Console.WriteLine(item.problem);
+                        }
+                    }
+                }
+
+                if (result.done == true && result.success == true)
+                {
+                    Console.WriteLine("Deployment completed successfully with no errors!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                throw;
+            }
+        }
+
         [Verb]
         public static void PushStaticResources([Required] string environment, string packagedirectory)
         {
@@ -142,13 +191,12 @@ namespace SalesforceMigrations
 
             if(String.IsNullOrWhiteSpace(packagedirectory))
                 packagedirectory = System.IO.Directory.GetCurrentDirectory();
-
-
+            
             Console.WriteLine("Pushing from: {0}", packagedirectory);
 
             try
             {
-                var resp = new SalesforceRepository(ph.GetContext(environment), new DateTimeDirectoryStrategy());
+                var resp = new SalesforceRepository(ph.GetContext(environment), null, new StaticResourcesOnlyDeploymentStrategy());
 
                 var options = new DeployOptions()
                 {

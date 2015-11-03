@@ -61,7 +61,8 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
 
             SalesforceFileProcessing.SaveByteArray(String.Format("{0}\\package_VF_{1}.zip", folder, Guid.NewGuid()), zip);
 
-            return String.Empty;
+            var id = Context.MetadataServiceAdapter.Deploy(zip, options).id;
+            return id;
         }
     }
 
@@ -168,7 +169,10 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
             GetContext = salesforceContext;
             _persistenceStrategy = persistenceStrategy;
             _deploymentStrategy = deploymentStrategy;
+
             if (_persistenceStrategy != null) _persistenceStrategy.Context = GetContext;
+            if (_deploymentStrategy != null) _deploymentStrategy.Context = GetContext;
+
             ApiVersion = 34.0;
         }
 

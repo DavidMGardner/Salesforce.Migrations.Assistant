@@ -32,7 +32,7 @@ namespace Salesforce.Migrations.Assistant.Library.Domain
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (!ctx.IsLoggedIn)
-                throw new InvalidOperationException("Service should be logged in Salesforce");
+                throw new InvalidOperationException("Service should be logged into Salesforce");
 
             List<SalesforceFileProxy> listFileProxies = new List<SalesforceFileProxy>();
             RetrieveRequest[] retrieveRequestArray = ConvertPackageToRequests(package);
